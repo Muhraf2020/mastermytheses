@@ -58,13 +58,6 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
   box-shadow:0 10px 25px rgba(0,0,0,.06);
 }
 
-/* Make them taller on tablets/desktops */
-@media (min-width: 768px){
-  .cover{ aspect-ratio: 3 / 5; }   /* 0.6 */
-}
-@media (min-width: 1024px){
-  .cover{ aspect-ratio: 1 / 2; }   /* 0.5 – quite tall */
-}
 .title{font-size:1.05rem; margin:.15rem 0}
 .sub{color:var(--muted); font-size:.92rem; margin-top:-.25rem}
 .meta{display:flex; gap:.4rem; flex-wrap:wrap; margin:.15rem 0 .1rem}
