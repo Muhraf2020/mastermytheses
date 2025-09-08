@@ -47,8 +47,14 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
   display:flex; flex-direction:column; gap:.5rem; transition:transform .18s ease, box-shadow .18s ease;
 }
 .card:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,132,199,.15) }
-.cover{ width:100%; aspect-ratio: 3/4; border-radius:12px; background:linear-gradient(135deg,#e8eff7,#dae3ee);
-  display:flex; align-items:center; justify-content:center; color:#334155; text-align:center; padding:1rem; font-weight:600}
+.cover{
+  width:100%;
+  aspect-ratio:3/4;
+  border-radius:12px;
+  display:block;          /* remove inline gaps */
+  object-fit:cover;       /* crop-to-fit without distortion */
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
 .title{font-size:1.05rem; margin:.15rem 0}
 .sub{color:var(--muted); font-size:.92rem; margin-top:-.25rem}
 .meta{display:flex; gap:.4rem; flex-wrap:wrap; margin:.15rem 0 .1rem}
