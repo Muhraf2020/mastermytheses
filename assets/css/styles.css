@@ -50,6 +50,7 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
 .cover{
   width:100%;
   aspect-ratio:2/3;
+  object-fit: cover;
   border-radius:12px;
   display:block;          /* remove inline gaps */
   object-fit:cover;       /* crop-to-fit without distortion */
