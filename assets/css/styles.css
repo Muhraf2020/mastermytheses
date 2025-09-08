@@ -51,11 +51,8 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
 .cover{
   width:100%;
   height:auto;
-  aspect-ratio: 5 / 8;      /* comfortable on phones */
-  object-position: center;
-  border-radius:12px;
-  display:block;
-  box-shadow:0 10px 25px rgba(0,0,0,.06);
+  aspect-ratio: 5 / 8;   /* 938:1500 = 5:8 */
+  object-fit: cover;
 }
 
 .title{font-size:1.05rem; margin:.15rem 0}
