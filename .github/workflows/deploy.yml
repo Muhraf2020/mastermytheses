@@ -1,0 +1,5 @@
+- name: Generate sitemap.xml
+  env:
+    SITE_DOMAIN: https://www.mastermytheses.com
+  run: |
+    python3 tools/generate_sitemap.py
