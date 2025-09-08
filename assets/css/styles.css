@@ -50,7 +50,7 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
 /* Base (mobile-first) */
 .cover{
   width:100%;
-  aspect-ratio: 5 / 8;      /* comfortable on phones */
+  aspect-ratio: 2 / 3;      /* comfortable on phones */
   object-fit: cover;
   object-position: center;
   border-radius:12px;
@@ -82,7 +82,7 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
 
 /* Details page: show full image, no cropping */
 .detail .cover{
-  aspect-ratio: 1/2;      /* or 5 / 8 if you want even taller */
+  aspect-ratio: 2/3;      /* or 5 / 8 if you want even taller */
   object-fit: contain;       /* no cropping */
   background:#fff;           /* subtle letterbox if ratios vary */
   padding:8px;               /* optional frame */
