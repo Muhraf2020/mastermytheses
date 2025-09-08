@@ -49,7 +49,7 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
 .card:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,132,199,.15) }
 .cover{
   width:100%;
-  aspect-ratio:2/3;
+  aspect-ratio:5/8;
   object-fit: cover;
   border-radius:12px;
   display:block;          /* remove inline gaps */
@@ -73,7 +73,7 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
 
 /* Details page: show full image, no cropping */
 .detail .cover{
-  aspect-ratio: 2 / 3;      /* or 5 / 8 if you want even taller */
+  aspect-ratio: 5 / 8;      /* or 5 / 8 if you want even taller */
   object-fit: contain;       /* no cropping */
   background:#fff;           /* subtle letterbox if ratios vary */
   padding:8px;               /* optional frame */
