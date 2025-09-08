@@ -18,7 +18,37 @@
   <link rel="stylesheet" href="assets/css/styles.css">
   <script defer src="assets/js/main.js"></script>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Mastering Research", "url": "https://YOUR-DOMAIN/", "logo": "https://YOUR-DOMAIN/assets/img/og-image.jpg"}</script>
+  <!-- Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Mastering Research",
+  "url": "https://www.mastermytheses.com/",
+  "logo": "https://www.mastermytheses.com/assets/img/og-image.jpg",
+  "sameAs": [
+    "https://www.amazon.com/stores/author/YOUR-AUTHOR-ID", 
+    "https://www.linkedin.com/in/YOUR-LINKEDIN",
+    "https://scholar.google.com/citations?user=YOUR-SCHOLAR-ID"
+  ]
+}
+</script>
+
+<!-- WebSite with Google site search -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"Mastering Research",
+  "url":"https://www.mastermytheses.com/",
+  "potentialAction":{
+    "@type":"SearchAction",
+    "target":"https://www.google.com/search?q=site%3Amastermytheses.com+{search_term_string}",
+    "query-input":"required name=search_term_string"
+  }
+}
+</script>
+
 </head>
 <body>
   <header class="site">
