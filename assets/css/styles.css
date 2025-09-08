@@ -50,7 +50,8 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
 /* Base (mobile-first) */
 .cover{
   width:100%;
-  aspect-ratio: 3 / 4;      /* comfortable on phones */
+  height:auto;
+  aspect-ratio: 5 / 8;      /* comfortable on phones */
   object-position: center;
   border-radius:12px;
   display:block;
