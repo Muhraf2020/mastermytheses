@@ -155,6 +155,18 @@
   ]
 }
 </script>
+<!-- (Optional) FAQ -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Who are these books for?","acceptedAnswer":{"@type":"Answer","text":"Grad students and early-career researchers who want a practical path from topic to publication."}},
+    {"@type":"Question","name":"Do I need prior experience with AI tools?","acceptedAnswer":{"@type":"Answer","text":"No. Each AI workflow is explained step-by-step, with prompts and cautions for responsible use."}},
+    {"@type":"Question","name":"Can I use the templates for my thesis or paper?","acceptedAnswer":{"@type":"Answer","text":"Yes—adapt them to your topic and discipline requirements."}}
+  ]
+}
+</script>
   
 </head>
 <body>
@@ -341,6 +353,115 @@
         </div>
       </article>
   </section>
+  <!-- About the Series -->
+ <section class="card about-series" id="about-series">
+  <div class="about-col">
+    <h2>About the Mastering Research Series</h2>
+    <p>
+      A practical, step-by-step library that guides graduate students and early-career researchers
+      across the full research lifecycle—from design to publication.
+    </p>
+    <ul class="feature-list">
+      <li>Clear frameworks and checklists to remove guesswork</li>
+      <li>AI-assisted workflows to save time without losing rigor</li>
+      <li>Templates you can reuse for proposals, papers, and reviews</li>
+    </ul>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-val">7</div>
+        <div class="stat-key">Books</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">4.6★</div>
+        <div class="stat-key">Average rating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">30K+</div>
+        <div class="stat-key">Readers &amp; students</div>
+      </div>
+    </div>
+
+    <div class="actions" style="margin-top:.5rem">
+      <a class="btn" href="#books">Browse the books</a>
+      <a class="btn secondary" href="about.html">About the series</a>
+    </div>
+  </div>
+
+  <div class="covers-col">
+    <!-- simple collage using your existing covers (use webp if available) -->
+    <div class="covers-grid">
+      <img src="assets/img/research-design-simplified.jpg" alt="Research Design Simplified cover" loading="lazy">
+      <img src="assets/img/qda-with-chatgpt-and-qualcoder.jpg" alt="QDA with ChatGPT & QualCoder cover" loading="lazy">
+      <img src="assets/img/literature-review-simplified-2e.jpg" alt="Literature Review Simplified 2e cover" loading="lazy">
+      <img src="assets/img/write-and-publish-scientific-paper.jpg" alt="Write and Publish Scientific Paper cover" loading="lazy">
+      <img src="assets/img/literature-review-simplified-1e.jpg" alt="Literature Review Simplified 1e cover" loading="lazy">
+      <img src="assets/img/research-proposal-writing-simplified.jpg" alt="Research Proposal Writing Simplified cover" loading="lazy">
+      <img src="assets/img/dissertation-literature-review-sprint.jpg" alt="Dissertation Literature Review Sprint cover" loading="lazy">
+    </div>
+  </div>
+</section>
+<!-- About the Author -->
+<section class="card author-band" id="author">
+  <div class="author-media">
+    <!-- Put your headshot at /assets/img/author.jpg (1200x1200 or 800x800) -->
+    <img src="assets/img/author.jpg" alt="Dr. Rafiq Muhammad, PhD" loading="lazy">
+  </div>
+  <div class="author-body">
+    <h2>Meet the Author — Dr. Rafiq Muhammad, PhD</h2>
+    <p>
+      I help researchers move from uncertainty to clarity with practical, repeatable systems.
+      My work focuses on simplifying research design, accelerating literature reviews,
+      and guiding students to publishable results.
+    </p>
+    <ul class="feature-list">
+      <li>Supervisor &amp; mentor to graduate researchers</li>
+      <li>Proven frameworks for design, analysis, and publication</li>
+      <li>Focus on ethical, effective AI use</li>
+    </ul>
+    <div class="actions">
+      <a class="btn" href="about.html">More about me</a>
+      <a class="btn secondary" href="#books">Explore the books</a>
+    </div>
+  </div>
+</section>
+  
+<!-- (Optional) Testimonials -->
+<!-- (Optional) FAQ -->  
+<section class="card testimonials">
+  <h2>What Readers Say</h2>
+  <div class="quotes">
+    <blockquote>
+      <p>“The 10-step lit review system saved my semester.”</p>
+      <footer>— PhD Candidate, Education</footer>
+    </blockquote>
+    <blockquote>
+      <p>“Finally published my first paper. The templates were gold.”</p>
+      <footer>— Early-career Researcher, Health Sciences</footer>
+    </blockquote>
+    <blockquote>
+      <p>“Clear prompts + QualCoder workflow cut my coding time in half.”</p>
+      <footer>— MA Student, Sociology</footer>
+    </blockquote>
+  </div>
+</section>
+
+<section class="card faq" id="faq">
+  <h2>FAQ</h2>
+  <details>
+    <summary>Who are these books for?</summary>
+    <p>Grad students and early-career researchers who want a practical path from topic to publication.</p>
+  </details>
+  <details>
+    <summary>Do I need prior experience with AI tools?</summary>
+    <p>No. Each AI workflow is explained step-by-step, with prompts and cautions for responsible use.</p>
+  </details>
+  <details>
+    <summary>Can I use the templates for my thesis or paper?</summary>
+    <p>Yes—adapt them to your topic and discipline requirements.</p>
+  </details>
+</section>
+  
 </main>
 <footer>© <span id="y"></span> Mastering Research. All rights reserved.</footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
