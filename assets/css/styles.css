@@ -130,3 +130,27 @@ footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
 .faq summary{cursor:pointer; font-weight:600}
 .faq p{margin:.6rem 0 0}
 
+/* Detail-page interior section styling */
+.card.inside{
+  background: var(--card);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: var(--ring);
+  margin: 1rem 0;
+}
+.quotes.compact{
+  display:grid;
+  gap:.75rem;
+}
+.quotes.compact blockquote{
+  margin:0;
+  padding:.75rem 1rem;
+  border-left:4px solid var(--brand);
+  background:#f8fafc;
+  border-radius:8px;
+}
+.quotes.compact footer{
+  font-size:.85rem;
+  color:var(--muted);
+  margin-top:.25rem;
+}
