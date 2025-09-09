@@ -83,3 +83,50 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
 
 /* Footer */
 footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
+
+/* About series */
+.about-series{
+  display:grid; grid-template-columns: 1.2fr .8fr; gap:1.25rem;
+}
+@media (max-width: 900px){ .about-series{grid-template-columns:1fr} }
+.about-col p{margin:.3rem 0 .6rem}
+.stats{display:flex; gap:1rem; flex-wrap:wrap; margin:.8rem 0}
+.stat{background:#f1f5f9;border-radius:12px;padding:.6rem .8rem;min-width:110px;text-align:center}
+.stat-val{font-weight:800; font-size:1.2rem}
+.stat-key{color:var(--muted); font-size:.8rem}
+
+.covers-col .covers-grid{
+  display:grid; grid-template-columns: repeat(3,1fr); gap:.5rem;
+}
+.covers-col img{
+  width:100%; border-radius:12px; object-fit:cover; aspect-ratio: 2/3;
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
+}
+
+/* Author band */
+.author-band{
+  display:grid; grid-template-columns: .9fr 1.1fr; gap:1.25rem; align-items:center;
+}
+@media (max-width: 900px){ .author-band{grid-template-columns:1fr} }
+.author-media img{width:100%; border-radius:16px; display:block; box-shadow:var(--ring)}
+.author-body p{margin:.3rem 0 .6rem}
+
+/* Testimonials */
+.testimonials .quotes,
+.inside .quotes{
+  display:grid; gap:.8rem; grid-template-columns: repeat(3,1fr);
+}
+@media (max-width: 900px){ .testimonials .quotes, .inside .quotes{grid-template-columns:1fr} }
+.quotes blockquote{
+  margin:0; padding:1rem; background:#f8fafc; border-radius:12px; border:1px solid #e2e8f0;
+}
+.quotes footer{color:var(--muted); font-size:.85rem; margin-top:.4rem}
+.quotes.compact{grid-template-columns: repeat(2,1fr)}
+@media (max-width: 900px){ .quotes.compact{grid-template-columns:1fr} }
+
+/* FAQ */
+.faq details{border:1px solid #e2e8f0; border-radius:12px; padding:.75rem 1rem; background:#fff}
+.faq details + details{margin-top:.6rem}
+.faq summary{cursor:pointer; font-weight:600}
+.faq p{margin:.6rem 0 0}
+
