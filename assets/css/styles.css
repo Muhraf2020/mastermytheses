@@ -154,3 +154,27 @@ footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
   color:var(--muted);
   margin-top:.25rem;
 }
+/* Layout: text left, image right */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Make the image *fit* its box, never crop */
+.hero > img,
+.hero .hero-art {
+  width: 100%;
+  height: auto;              /* do NOT force a fixed height */
+  max-height: 440px;         /* keeps it from towering */
+  object-fit: contain !important;  /* override any 'cover' rules */
+  border-radius: 16px;
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero > img,
+  .hero .hero-art { max-width: 520px; margin: 12px auto 0; }
+}
+
