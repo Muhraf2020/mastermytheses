@@ -162,33 +162,34 @@ footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
   gap: 2rem;
 }
 
-/* HERO layout: text left, image right */
+/* HERO layout: text left, image right (final) */
 .hero {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  align-items: center;
   gap: 2rem;
+  align-items: start;              /* top-align columns */
 }
 
-/* Allow children to shrink inside the grid (prevents squish) */
+/* Let grid children shrink (prevents squish) */
 .hero > * { min-width: 0; }
 
-/* Make the image fit its column without cropping or stretching */
-.hero > img,
-.hero .hero-art {
+/* Fit the image without cropping or stretching */
+.hero .hero-art,
+.hero > img {
   display: block;
   width: 100%;
-  max-width: 100%;
-  height: auto !important;           /* override any height:100% */
-  max-height: 440px;                 /* tweak to taste */
-  object-fit: contain !important;    /* never crop */
+  height: auto !important;         /* override any height:100% */
+  max-height: 440px;               /* tweak to taste */
+  object-fit: contain !important;
   object-position: center center !important;
   border-radius: 16px;
 }
 
+/* Mobile: stack and center the image */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; }
-  .hero > img,
-  .hero .hero-art { max-width: 520px; margin: 12px auto 0; }
+  .hero .hero-art,
+  .hero > img { max-width: 520px; margin: 12px auto 0; }
 }
+
 
