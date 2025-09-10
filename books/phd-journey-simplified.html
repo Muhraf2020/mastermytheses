@@ -66,6 +66,31 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"Who is this book best for?",
+      "acceptedAnswer": {
+        "@type":"Answer",
+        "text":"Graduate students and early-career researchers who want a step-by-step system."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Do I need prior expertise?",
+      "acceptedAnswer": {
+        "@type":"Answer",
+        "text":"No. The book includes templates and examples you can apply immediately."
+      }
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
   <header class="site">
@@ -89,7 +114,7 @@
         <img class="cover"
              src="../assets/img/phd-journey-simplified.jpg"
              alt="PhD Journey Simplified — book cover"
-             width="1000" height="1500" loading="lazy">
+             width="1000" height="1500" fetchpriority="high" decoding="async">
       </picture>
 
       <div class="actions" style="margin-top:.75rem">
@@ -150,6 +175,17 @@
       </ul>
 
       <div class="hr"></div>
+
+      <section class="card inside" id="faq">
+       <h2>FAQs</h2>
+       <div class="faq">
+       <h3>Who is this book best for?</h3>
+       <p>Graduate students and early-career researchers who want a step-by-step system.</p>
+
+       <h3>Do I need prior expertise?</h3>
+       <p>No. The book includes templates and examples you can apply immediately.</p>
+       </div>
+       </section>
 
       <!-- Prev/Next — adjust once you choose the position in your series -->
       <div class="bottom-nav">
