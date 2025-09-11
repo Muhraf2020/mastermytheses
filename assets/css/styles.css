@@ -44,6 +44,7 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
 /* Hero image (no crop, no stretch) */
 .hero .hero-art {
   display: block;
+  width: 100%;               /* NEW: lets margin:auto center the image */
   max-width: 100%;
   height: auto;              /* never stretches */
   object-fit: contain;       /* never crops */
@@ -55,8 +56,19 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
 /* Mobile: stack & center the image */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; }
-  .hero .hero-art { max-width: 520px; margin: 12px auto 0; }
+
+  /* Center the <picture> grid item horizontally */
+  .hero picture { justify-self: center; max-width: 100%; }
+
+  /* Keep the image centered and capped in width */
+  .hero .hero-art {
+    width: 100%;
+    max-width: 520px;
+    margin: 12px auto 0;     /* centers within the picture */
+    object-position: center;
+  }
 }
+
 
 /* Prevent tiny horizontal overflow on small screens */
 .hero{ overflow-x:hidden; }
