@@ -202,4 +202,21 @@ footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
   margin-top:.25rem;
 }
 
+/* ===== EXPERIMENT: Option A (start) ===== */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    justify-items: center;
+  }
+  .hero picture { justify-self: stretch; max-width: 100%; }
+  .hero .hero-art {
+    width: 100%;
+    max-width: none;
+    margin: 12px 0 0;
+    max-height: 520px;
+    object-position: center;
+  }
+}
+/* ===== EXPERIMENT: Option A (end) ===== */
 
