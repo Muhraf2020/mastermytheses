@@ -1,29 +1,56 @@
-// /assets/js/amazon-track.js
+// v3 — robust Amazon click tracking for GA4
 (function () {
-  function handleClick(ev) {
-    const a = ev.target && ev.target.closest && ev.target.closest('a[href]');
+  function getAnchorFromEvent(ev) {
+    // Prefer composedPath (works through nested elements/shadow DOM)
+    if (typeof ev.composedPath === 'function') {
+      const path = ev.composedPath();
+      for (const n of path) {
+        if (n && n.tagName === 'A' && n.href) return n;
+      }
+    }
+    // Fallback to closest
+    const t = ev.target;
+    if (t && t.closest) {
+      const a = t.closest('a[href]');
+      if (a) return a;
+    }
+    return null;
+  }
+
+  function isAmazonUrl(href) {
+    try {
+      const u = new URL(href, location.href);
+      // match *.amazon.<tld>
+      return /(^|\.)amazon\./i.test(u.hostname);
+    } catch {
+      return false;
+    }
+  }
+
+  function track(ev) {
+    const a = getAnchorFromEvent(ev);
     if (!a) return;
+    const href = a.getAttribute('href') || a.href || '';
+    if (!isAmazonUrl(href)) return;
 
-    const href = a.getAttribute('href') || '';
-    // dp / gp/product product pages only
-    const isAmazonProduct = /^https?:\/\/(www\.)?amazon\.[a-z.]+\/(dp|gp\/product)\//i.test(href);
-    if (!isAmazonProduct) return;
-
-    // GA4 event (realtime -> Events)
+    // Send GA4 event
     if (typeof gtag === 'function') {
       gtag('event', 'amazon_click', {
-        link_url: href,
+        link_url: a.href || href,
         link_text: (a.textContent || '').trim(),
         page_location: location.href,
-        transport_type: 'beacon'   // send reliably on navigation
+        transport_type: 'beacon'
       });
     }
   }
 
-  // Left/primary click
-  document.addEventListener('click', handleClick, true);
-  // Middle-click (open in new tab)
+  // Capture phase so we run before navigation
+  document.addEventListener('click', track, true);
+  // Middle-click (new tab)
   document.addEventListener('auxclick', function (e) {
-    if (e.button === 1) handleClick(e);
+    if (e.button === 1) track(e);
   }, true);
+
+  // Optional: quick console signal that the file loaded
+  // console.log('[amazon-track] loaded');
 })();
