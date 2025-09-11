@@ -5,7 +5,9 @@
   --ring: 0 10px 30px rgba(2,132,199,.18);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth; overflow-x:hidden;}
+body{overflow-x:hidden;}
+
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
 
 /* Header */
@@ -55,6 +57,10 @@ main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
   .hero { grid-template-columns: 1fr; }
   .hero .hero-art { max-width: 520px; margin: 12px auto 0; }
 }
+
+/* Prevent tiny horizontal overflow on small screens */
+.hero{ overflow-x:hidden; }
+.hero picture{ display:block; max-width:100%; }
 
 
 /* Section heading */
