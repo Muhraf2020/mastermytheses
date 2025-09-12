@@ -282,23 +282,29 @@ footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
 }
 
 
-/* Compact spacing inside book detail panels */
-.card.detail .inside h2{               /* headings like “What’s inside”, “Who it’s for” */
+/* Compact spacing inside the “What’s inside / Who it’s for / What readers say” panel */
+.card.detail .inside { padding: 1rem 1rem; }
+
+.card.detail .inside h2{
   margin: .75rem 0 .4rem;
 }
 
-.card.detail .inside .feature-list{    /* the bullet lists under those headings */
-  margin: 0 0 .55rem;
-}
-.card.detail .inside .feature-list li{
-  margin: .22rem 0;                    /* tighter list item gap */
+/* lists under each heading */
+.card.detail .inside .feature-list{ margin: 0 0 .55rem; }
+.card.detail .inside .feature-list li{ margin: .2rem 0; }
+
+/* the divider line */
+.card.detail .inside .hr,
+.card.detail .inside hr{
+  margin: .5rem 0;                 /* tighten the band */
 }
 
-/* the thin divider between sub-sections within the inside card */
-.card.detail .inside .hr{
-  margin: .6rem 0;                     /* was larger; reduces the big empty band */
+/* prevent double spacing after a divider (hr + next h2) */
+.card.detail .inside .hr + h2,
+.card.detail .inside hr + h2{
+  margin-top: .35rem;
 }
 
-/* quotes section (“What readers say”) */
+/* quotes block */
 .card.detail .inside .quotes{ margin: .6rem 0; }
 .card.detail .inside blockquote{ margin: .4rem 0; }
