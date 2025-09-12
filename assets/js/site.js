@@ -1,15 +1,16 @@
-// FAQ true-accordion (only one <details> open per .faq section)
-document.addEventListener('click', (e) => {
-  const summary = e.target.closest('summary');
-  if (!summary) return;
+// Only one <details> open per .faq section
+document.addEventListener(
+  'toggle',
+  (e) => {
+    const details = e.target;
+    if (details.tagName !== 'DETAILS') return;     // ignore other toggles
+    if (!details.open) return;                     // only when one just opened
+    const container = details.closest('.faq');
+    if (!container) return;
 
-  const container = summary.closest('.faq');
-  const current = summary.parentElement; // the <details>
-
-  // Only act when opening (not when closing)
-  if (!container || !current.open) return;
-
-  container.querySelectorAll('details[open]').forEach(d => {
-    if (d !== current) d.removeAttribute('open');
-  });
-});
+    container.querySelectorAll('details[open]').forEach((d) => {
+      if (d !== details) d.open = false;          // close siblings
+    });
+  },
+  true // use capture so it works reliably across browsers
+);
