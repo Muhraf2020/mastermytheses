@@ -308,3 +308,30 @@ footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
 /* quotes block */
 .card.detail .inside .quotes{ margin: .6rem 0; }
 .card.detail .inside blockquote{ margin: .4rem 0; }
+
+
+/* Profile extras */
+.profile-extras h2{ margin: .6rem 0 .4rem; }
+
+/* icon buttons row */
+.social-links{
+  display: flex; flex-wrap: wrap; gap: .5rem; margin: .4rem 0 .8rem;
+}
+.icon-btn{
+  display: inline-flex; align-items: center; gap: .45rem;
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 999px;
+  padding: .45rem .75rem; font-weight: 600; text-decoration: none; color: #0f172a;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.icon-btn:hover{ transform: translateY(-1px); box-shadow: 0 4px 10px rgba(2,6,23,.08); }
+
+/* education badges row */
+.edu-row{
+  list-style: none; padding: 0; margin: .4rem 0 0;
+  display: flex; flex-wrap: wrap; gap: .5rem;
+}
+.edu-badge{
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 10px;
+  padding: .4rem .6rem; font-weight: 600;
+}
