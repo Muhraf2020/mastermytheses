@@ -335,3 +335,55 @@ footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
   background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 10px;
   padding: .4rem .6rem; font-weight: 600;
 }
+
+/* ===== Profile extras (About page) ===== */
+.card.profile-extras { padding-top: 1.25rem; }
+
+.profile-extras .social-links{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem .8rem;
+  margin: .25rem 0 1rem;
+}
+
+.profile-extras .icon-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .42rem .68rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  background: #fff;
+  text-decoration: none;
+  color: inherit; /* use site text color */
+  line-height: 1;
+  transition: box-shadow .2s ease, transform .05s ease;
+}
+.profile-extras .icon-btn:hover{
+  box-shadow: 0 4px 10px rgba(2,6,23,.08);
+  transform: translateY(-1px);
+}
+.profile-extras .icon-btn svg{
+  display: block; 
+  opacity: .9;
+}
+
+/* divider inside card */
+.profile-extras .hr{
+  height:1px; background:#e5e7eb; margin: 1rem 0 1.1rem;
+}
+
+/* Education row */
+.profile-extras .edu-row{
+  display:flex; flex-wrap:wrap; gap:.6rem .7rem;
+  list-style:none; margin:.4rem 0 0; padding:0;
+}
+.profile-extras .edu-badge{
+  display:inline-flex; align-items:center; gap:.4rem;
+  padding:.42rem .68rem;
+  border:1px solid #e5e7eb; border-radius:999px;
+  background:#fff; white-space:nowrap;
+}
+.profile-extras .edu-badge svg{ opacity:.85; }
+
