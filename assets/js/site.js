@@ -1,34 +1,23 @@
-// Only one <details> open per .faq section (robust: works on all pages)
+// Only one <details> open per FAQ
 (function () {
-  function closeSiblings(currentDetails) {
-    const container = currentDetails.closest('.faq');
-    if (!container) return;
-    container.querySelectorAll('details[open]').forEach((d) => {
-      if (d !== currentDetails) d.open = false;
+  function closeSiblings(current) {
+    // Prefer .faq; fall back to the nearest section or parent node
+    const scope =
+      current.closest('.faq') ||
+      current.closest('section') ||
+      current.parentElement ||
+      document;
+    scope.querySelectorAll('details[open]').forEach((d) => {
+      if (d !== current) d.open = false;
     });
   }
 
-  // Preferred: fires after the open/close state changes
+  // Fires after the open/close state changes
   document.addEventListener(
     'toggle',
     (e) => {
       const el = e.target;
       if (el && el.tagName === 'DETAILS' && el.open) closeSiblings(el);
-    },
-    true // capture for consistent behavior
-  );
-
-  // Fallback for odd browsers/edge cases: run after click toggles state
-  document.addEventListener(
-    'click',
-    (e) => {
-      const summary = e.target.closest && e.target.closest('summary');
-      if (!summary) return;
-      const details = summary.parentElement;
-      // wait a tick for the native toggle to apply
-      setTimeout(() => {
-        if (details.open) closeSiblings(details);
-      }, 0);
     },
     true
   );
