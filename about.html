@@ -91,15 +91,75 @@
       </nav>
     </div>
   </header>
+
 <main>
+  <!-- Hero -->
   <section class="hero" style="grid-template-columns:1fr">
     <div>
-      <h1>About the Series</h1>
-      <p>A practical book series by Dr. Rafiq Muhammad, PhD — guiding graduate students and early‑career researchers.</p>
-      <p class="note">This site lists the books with clean product pages and direct purchase links on Amazon.</p>
+      <h1>About MasterMyTheses</h1>
+      <p>
+        MasterMyTheses.com curates the <em>Mastering Research</em> series and offers a fast,
+        distraction-free way to explore each title.
+      </p>
+      <p class="note">
+        Static site on GitHub Pages → quick loads, reliable uptime, and direct Amazon links for checkout.
+      </p>
+    </div>
+  </section>
+
+  <!-- About the website -->
+  <section class="card">
+    <h2>About the website</h2>
+    <p>
+      Built as a lightweight static site on <strong>GitHub Pages</strong>, MasterMyTheses delivers
+      <strong>fast load times</strong>, a simple browsing experience, and clean book detail pages with
+      <strong>transparent</strong> descriptions, templates, and ethical AI guidance. Our mission is to
+      <strong>democratise research skills</strong>—making high-quality, affordable guides available to
+      students and early-career researchers everywhere.
+    </p>
+    <ul class="feature-list">
+      <li>Fast, secure static hosting with straightforward <em>HTML/CSS/JS</em>.</li>
+      <li>Clear product pages and canonical URLs for accurate indexing.</li>
+      <li>Guides, checklists, and ethical AI strategies that support reproducible research.</li>
+      <li>Direct purchase via Amazon; all outbound buy links are marked <code>rel="nofollow sponsored"</code>.</li>
+      <li>Questions or partnerships? <a href="contact.html">Contact us</a>.</li>
+    </ul>
+  </section>
+
+  <!-- Author -->
+  <section class="card author-band" id="author">
+    <div class="author-media">
+      <img src="assets/img/author.jpg" alt="Dr. Rafiq Muhammad, PhD" loading="lazy">
+    </div>
+    <div class="author-body">
+      <h2>Meet the Author — Dr. Rafiq Muhammad, PhD</h2>
+      <p>
+        Dr. Rafiq Muhammad holds an MD from Khyber Medical University, an MIHMEP
+        (Master of International Health Management, Economics and Policy) from SDA Bocconi
+        School of Management, and a PhD in healthcare data sciences from Karolinska Institutet.
+        His research focuses on predictive modelling for chronic conditions and healthcare analytics,
+        and he has collaborated on public-health interventions and disease surveillance.
+      </p>
+      <p>
+        Dr. Muhammad is passionate about evidence-based medicine, literature reviews and
+        scientific writing, and he shares his expertise through academic consultancy and training.
+        By blending clinical experience with data science, he equips researchers with rigorous
+        methods, ethical frameworks and AI-powered tools to accelerate discovery.
+      </p>
+      <ul class="feature-list">
+        <li>Supervisor &amp; mentor to graduate researchers</li>
+        <li>Frameworks for research design, analysis, and publication</li>
+        <li>Focus on transparent, ethical AI in research</li>
+      </ul>
+      <div class="actions">
+        <a class="btn" href="index.html#books">Browse the books</a>
+        <a class="btn secondary" href="index.html">Back to Home</a>
+      </div>
     </div>
   </section>
 </main>
+
+
 <footer>© <span id="y"></span> Mastering Research.</footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
   <!-- change v=1 (or v=2/3) to v=4 -->
