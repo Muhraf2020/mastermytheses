@@ -274,3 +274,9 @@ footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
   transform: rotate(360deg);
 }
 
+/* Book detail H1 (match old size) */
+.card.detail h1.title{
+  font-size: 1.6rem;
+  line-height: 1.35;
+  margin: .15rem 0 .35rem;
+}
