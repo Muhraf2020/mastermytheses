@@ -254,3 +254,23 @@ footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
 }
 
 .card.faq p { margin-top: 0.5rem; }
+
+/* FAQ icon: + that rotates on open */
+.card.faq summary::-webkit-details-marker { display: none; }
+
+.card.faq summary::after {
+  content: "+";
+  display: inline-block;
+  width: 1em;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1;
+  margin-left: .5rem;
+  transition: transform .25s ease;
+}
+
+.card.faq details[open] summary::after {
+  transform: rotate(360deg);
+}
+
