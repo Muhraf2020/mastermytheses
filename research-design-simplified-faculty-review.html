@@ -3,11 +3,10 @@
 <head>
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-  <!-- Optional fallback -->
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//www.google-analytics.com">
 
-  <!-- Google Analytics (GA4) -->
+  <!-- Google Analytics (GA4) - Use MasterMyTheses tracking ID if different -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L46RQZSXYV"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
@@ -18,43 +17,37 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Faculty Examination Copy Request | GradSummit</title>
+  <title>Faculty Examination Copy Request | MasterMyTheses</title>
   <meta name="description" content="Request a complimentary examination copy of Research Design Simplified for your research methods course.">
-  <link rel="canonical" href="https://www.gradsummit.com/research-design-simplified-faculty-review.html">
+  <link rel="canonical" href="https://www.mastermytheses.com/research-design-simplified-faculty-review.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Faculty Examination Copy Request | GradSummit">
+  <meta property="og:title" content="Faculty Examination Copy Request | MasterMyTheses">
   <meta property="og:description" content="Request a complimentary examination copy of Research Design Simplified for your research methods course.">
-  <meta property="og:image" content="https://www.gradsummit.com/assets/img/og-image.jpg">
-  <meta property="og:url" content="https://www.gradsummit.com/research-design-simplified-faculty-review.html">
+  <meta property="og:image" content="https://www.mastermytheses.com/assets/img/og-image.jpg">
+  <meta property="og:url" content="https://www.mastermytheses.com/research-design-simplified-faculty-review.html">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Faculty Examination Copy Request | GradSummit">
+  <meta name="twitter:title" content="Faculty Examination Copy Request | MasterMyTheses">
   <meta name="twitter:description" content="Request a complimentary examination copy of Research Design Simplified for your research methods course.">
-  <meta name="twitter:image" content="https://www.gradsummit.com/assets/img/og-image.jpg">
+  <meta name="twitter:image" content="https://www.mastermytheses.com/assets/img/og-image.jpg">
 
+  <!-- Check if your mastermytheses uses same CSS path -->
   <link rel="stylesheet" href="/assets/css/styles.css?v=6">
 
   <!-- Favicons -->
   <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32">
   <link rel="icon" href="/assets/img/favicon-192.png" sizes="192x192">
-
-  <!-- iOS home-screen icon -->
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
-
-  <!-- PWA manifest -->
   <link rel="manifest" href="/site.webmanifest">
-
-  <!-- Browser UI color (Android address bar, etc.) -->
   <meta name="theme-color" content="#0ea5e9">
 
   <!-- Open Graph / Twitter Defaults -->
-  <meta property="og:site_name" content="GradSummit">
+  <meta property="og:site_name" content="MasterMyTheses">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:site" content="@AcademiaWithAI">
   <meta name="robots" content="index, follow">
 
-  <!-- Additional styles for form (matching your site's design system) -->
+  <!-- Form styles matching your site design -->
   <style>
-    /* Form-specific styles using GradSummit color palette */
     .page-content {
       max-width: 800px;
       margin: 2rem auto;
@@ -260,10 +253,10 @@
   </style>
 </head>
 <body>
-  <!-- Exact header from index.html -->
+  <!-- Header - Update paths based on your mastermytheses structure -->
   <header class="site">
     <div class="wrap">
-      <div class="brand"><a href="/" style="color:inherit;text-decoration:none">Grad Summit</a></div>
+      <div class="brand"><a href="/" style="color:inherit;text-decoration:none">MasterMyTheses</a></div>
       <nav aria-label="Primary">
         <a href="/">Home</a>
         <a href="/#books">Books</a>
@@ -316,6 +309,9 @@
         <p style="margin-bottom: 2rem; color: #6b7280;">Complete this form to receive either a digital PDF (immediate access) or physical examination copy (ships in 3-5 business days).</p>
         
         <form id="facultyForm" name="facultyForm">
+          
+          <!-- Hidden field to track source -->
+          <input type="hidden" name="Source" value="MasterMyTheses.com">
           
           <!-- Personal Information -->
           <div class="form-group">
@@ -422,13 +418,13 @@
     </div>
   </main>
 
-  <!-- Footer from index.html -->
-  <footer>© <span id="y"></span> GradSummit. All rights reserved.</footer>
+  <!-- Footer -->
+  <footer>© <span id="y"></span> MasterMyTheses. All rights reserved.</footer>
   <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 
   <script>
-    // IMPORTANT: Replace this URL with your Google Apps Script web app URL
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLdTvFhlVfOypSLGks06QS9BfTkDFaxNM9JgCZp0othZgofXqJyx9CIxQutc8AT_Ji/exec';
+    // IMPORTANT: Use the SAME Google Apps Script URL from your gradsummit implementation
+    const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec';
     
     // Show/hide address field based on format selection
     const formatRadios = document.querySelectorAll('input[name="Format"]');
@@ -510,6 +506,7 @@
     });
   </script>
 
+  <!-- Add your site-specific scripts if needed -->
   <script defer src="/assets/js/site.js?v=2"></script>
 </body>
 </html>
