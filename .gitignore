@@ -12,3 +12,6 @@ Thumbs.db
 
 # originals for cover import; the derived files in assets/img are what ship
 incoming-covers/
+
+# local preview config, not part of the site
+.claude/

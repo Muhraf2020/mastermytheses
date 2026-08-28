@@ -1,26 +1,32 @@
 #!/usr/bin/env python3
 """
-import_clinical_covers.py - turn the cover originals dropped in incoming-covers/
-into the four variants every book card on this site expects.
+import_clinical_covers.py - derive site covers for the eight books this site is
+the only home for.
 
-The eighteen covers this site already carries follow a fixed convention, and new
-ones must match it exactly or they will look wrong in the same grid:
+The eighteen covers already here follow a fixed convention, and new ones must
+match it exactly or they look wrong in the same grid:
 
     assets/img/<slug>.jpg        938x1500   full size
     assets/img/<slug>-600.jpg    600x960    small variant for srcset
     assets/img/<slug>.webp       938x1500
     assets/img/<slug>-600.webp   600x960
 
-Originals stay in incoming-covers/ (git-ignored). Only the derived files ship,
-so re-running after replacing an original simply refreshes them.
+Sources are the author's originals. Filenames there carry no slug, and the five
+clinical workbooks are numbered CW01-CW05 rather than named, so SOURCES records
+the mapping explicitly. Each was confirmed by opening the file and reading the
+cover, and the template count printed on each cover matches local_books.py.
 
-    python tools/import_clinical_covers.py            # import what is present
+Fit is a centre crop, not a pad. Five of the eight are exactly 5:8 and are
+untouched by it. The three "Simplified" covers are 1700x2560, and letterboxing
+those would put white bars across a dark navy cover; trimming about 3% from each
+side is invisible by comparison. A crop deeper than MAX_CROP is refused rather
+than silently mangling artwork.
+
+    python tools/import_clinical_covers.py            # import
     python tools/import_clinical_covers.py --check    # report only, write nothing
-
-Exit status is non-zero if a cover is missing or unusable, so this can gate a
-build. A missing cover is reported, never substituted.
 """
 
+import os
 import sys
 from pathlib import Path
 
@@ -30,84 +36,96 @@ except ImportError:
     sys.exit("Pillow is required: python -m pip install Pillow")
 
 REPO = Path(__file__).resolve().parent.parent
-SRC = REPO / "incoming-covers"
+DROP = REPO / "incoming-covers"
+LIBRARY = Path(os.environ.get("BOOKS_DIR", "D:/books"))
 OUT = REPO / "assets" / "img"
 
-# The eight books this site is the only home for. Slugs match local_books.py;
-# build_site.py derives the image name from the slug, so these must agree.
-SLUGS = [
-    "clinical-audit-quality-improvement",
-    "clinical-case-report",
-    "clinical-research-design-simplified",
-    "clinical-trial-protocol",
-    "evidence-based-practice-project",
-    "implementation-science",
-    "public-health-research-simplified",
-    "systematic-reviews-healthcare-simplified",
-]
+# slug -> filename in the author's book library. Verified visually, one by one.
+SOURCES = {
+    "clinical-audit-quality-improvement":       "CW01_eBook_Cover_1600x2560.png",
+    "evidence-based-practice-project":          "CW02_eBook_Cover_1600x2560.jpg",
+    "clinical-case-report":                     "CW03_eBook_Cover_1600x2560.png",
+    "implementation-science":                   "CW04_eBook_Cover_1600x2560.jpg",
+    "clinical-trial-protocol":                  "CW05_eBook_Cover_1600x2560.jpg",
+    "clinical-research-design-simplified":      "Clinical_Research_Design_Simplified.jpg",
+    "public-health-research-simplified":        "Public_Health_Research_Simplified_eBook Cover.jpg",
+    "systematic-reviews-healthcare-simplified": "Systematic_Reviews_Meta_Analysis_Healthcare_Simplified ebook.jpg",
+}
 
 ACCEPT = (".jpg", ".jpeg", ".png", ".webp")
 SIZES = [(938, 1500, ""), (600, 960, "-600")]
-TARGET_RATIO = 1500 / 938          # 1.599, the 5:8 portrait the grid assumes
-RATIO_TOLERANCE = 0.06             # a few percent of letterboxing is invisible
-MIN_WIDTH = 938                    # below this we are upscaling
+TARGET = 938 / 1500      # 0.6253, the 5:8 the grid assumes
+MIN_WIDTH = 938
+MAX_CROP = 0.15          # refuse to discard more than this fraction of a side
 
 
 def find_source(slug):
-    """Return the dropped original for a slug, whatever extension it carries."""
+    """Prefer a file dropped in incoming-covers/, else the mapped original."""
     for ext in ACCEPT:
-        p = SRC / (slug + ext)
+        p = DROP / (slug + ext)
         if p.exists():
             return p
-    # tolerate a stray suffix like "-cover" so a KDP download works unrenamed
-    for p in sorted(SRC.iterdir()) if SRC.is_dir() else []:
-        if p.suffix.lower() in ACCEPT and p.stem.lower().startswith(slug):
+    name = SOURCES.get(slug)
+    if name:
+        p = LIBRARY / name
+        if p.exists():
             return p
     return None
 
 
 def derive(src, slug, write=True):
-    """Produce the four variants. Returns (notes, wrote_count)."""
     notes, wrote = [], 0
     with Image.open(src) as im:
         im = im.convert("RGB")
         w, h = im.size
-        ratio = h / w
 
-        if abs(ratio - TARGET_RATIO) > RATIO_TOLERANCE:
-            notes.append("shape %dx%d (ratio %.2f, expected %.2f) - it will be "
-                         "letterboxed onto the 5:8 card rather than cropped"
-                         % (w, h, ratio, TARGET_RATIO))
         if w < MIN_WIDTH:
-            notes.append("only %dpx wide; upscaling to %dpx will look soft next "
-                         "to the other covers" % (w, MIN_WIDTH))
+            notes.append("only %dpx wide; upscaling to %dpx will look soft"
+                         % (w, MIN_WIDTH))
+
+        # Centre-crop to the target aspect, discarding the smaller dimension.
+        want = TARGET
+        have = w / h
+        if have > want:                       # too wide: trim left and right
+            new_w = int(round(h * want))
+            off = (w - new_w) // 2
+            box = (off, 0, off + new_w, h)
+            frac = (w - new_w) / w
+            side = "width"
+        else:                                 # too tall: trim top and bottom
+            new_h = int(round(w / want))
+            off = (h - new_h) // 2
+            box = (0, off, w, off + new_h)
+            frac = (h - new_h) / h
+            side = "height"
+
+        if frac > MAX_CROP:
+            raise ValueError("would crop %.0f%% off the %s (limit %.0f%%); "
+                             "this cover is the wrong shape for the grid"
+                             % (frac * 100, side, MAX_CROP * 100))
+        if frac > 0.005:
+            notes.append("cropped %.1f%% off the %s to reach 5:8 (%.1f%% per edge)"
+                         % (frac * 100, side, frac * 50))
 
         if not write:
             return notes, 0
 
+        cropped = im.crop(box)
         for tw, th, suffix in SIZES:
-            # Fit inside the target box and pad, so nothing is ever cropped off
-            # a cover. A correctly-proportioned source pads by zero pixels.
-            fitted = im.copy()
-            fitted.thumbnail((tw, th), Image.LANCZOS)
-            canvas = Image.new("RGB", (tw, th), (255, 255, 255))
-            canvas.paste(fitted, ((tw - fitted.width) // 2,
-                                  (th - fitted.height) // 2))
-            canvas.save(OUT / ("%s%s.jpg" % (slug, suffix)), "JPEG",
-                        quality=88, optimize=True, progressive=True)
-            canvas.save(OUT / ("%s%s.webp" % (slug, suffix)), "WEBP", quality=86)
+            out = cropped.resize((tw, th), Image.LANCZOS)
+            out.save(OUT / ("%s%s.jpg" % (slug, suffix)), "JPEG",
+                     quality=88, optimize=True, progressive=True)
+            out.save(OUT / ("%s%s.webp" % (slug, suffix)), "WEBP", quality=86)
             wrote += 2
     return notes, wrote
 
 
 def main():
     check_only = "--check" in sys.argv
-    if not SRC.is_dir():
-        sys.exit("drop folder not found: %s" % SRC)
     OUT.mkdir(parents=True, exist_ok=True)
 
-    missing, done, total_files = [], 0, 0
-    for slug in SLUGS:
+    missing, done, total = [], 0, 0
+    for slug in sorted(SOURCES):
         src = find_source(slug)
         if src is None:
             missing.append(slug)
@@ -115,20 +133,20 @@ def main():
             continue
         try:
             notes, wrote = derive(src, slug, write=not check_only)
-        except Exception as exc:                      # unreadable / truncated file
+        except Exception as exc:
             missing.append(slug)
-            print("  UNUSABLE %s (%s): %s" % (slug, src.name, exc))
+            print("  UNUSABLE %s: %s" % (slug, exc))
             continue
-        total_files += wrote
+        total += wrote
         done += 1
-        print("  %s %-44s <- %s" % ("check " if check_only else "import", slug, src.name))
+        print("  %s %-44s <- %s" % ("check" if check_only else "wrote", slug, src.name))
         for n in notes:
-            print("           warning: %s" % n)
+            print("           note: %s" % n)
 
     print("\n  %d of %d covers %s, %d files written"
-          % (done, len(SLUGS), "checked" if check_only else "imported", total_files))
+          % (done, len(SOURCES), "checked" if check_only else "imported", total))
     if missing:
-        print("\n  still needed (see incoming-covers/README.md):")
+        print("\n  still needed:")
         for s in missing:
             print("    %s" % s)
         return 1
