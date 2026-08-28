@@ -40,6 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import external_books  # noqa: E402
 from local_books import LOCAL_BOOKS  # noqa: E402
 from navigation import CHOOSER, PATHWAYS  # noqa: E402
+from book_detail import DETAIL  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
 SITE = "https://www.mastermytheses.com"
@@ -269,6 +270,31 @@ def build_book(b, siblings):
     }]
     ld[0] = {k: v for k, v in ld[0].items() if v is not None}
 
+    d = DETAIL.get(b["slug"])
+    if not d:
+        raise SystemExit(
+            "%s has no entry in book_detail.py. A page without it runs to roughly 250 "
+            "words, which is too thin to rank — the whole reason these eight books "
+            "needed a home here." % b["slug"])
+
+    # The FAQ is rendered once as <details> and once as FAQPage structured data,
+    # from the same source, so the two cannot disagree.
+    ld.append({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": q,
+             "acceptedAnswer": {"@type": "Answer", "text": a}}
+            for q, a in d["faq"]
+        ],
+    })
+
+    who = "\n".join("      <li>%s</li>" % html.escape(w) for w in d["who"])
+    inside = "\n".join("      <li>%s</li>" % html.escape(i) for i in d["inside"])
+    faq = "\n".join(
+        '    <details>\n      <summary>%s</summary>\n      <p>%s</p>\n    </details>'
+        % (html.escape(q), html.escape(a)) for q, a in d["faq"])
+
     outcomes = "\n".join("      <li>%s</li>" % html.escape(o) for o in b["outcomes"])
     frameworks = ", ".join(html.escape(f) for f in b["frameworks"])
     templates = ('<span class="badge">%d fill-in templates</span>' % b["templates"]
@@ -304,14 +330,39 @@ def build_book(b, siblings):
   </section>
 
   <section class="card inside" style="margin-top:1.25rem">
+    <h2>Who it is for</h2>
+    <ul class="feature-list">
+{who}
+    </ul>
+    <p><strong>Who should look elsewhere.</strong> {not_for}</p>
+  </section>
+
+  <section class="card inside" style="margin-top:1.25rem">
+    <h2>What is inside</h2>
+    <ul class="feature-list">
+{inside}
+    </ul>
+  </section>
+
+  <section class="card inside" style="margin-top:1.25rem">
     <h2>What you will have finished</h2>
     <ul class="feature-list">
 {outcomes}
     </ul>
+  </section>
+
+  <section class="card inside" style="margin-top:1.25rem">
+    <h2>What this adds to the free guidance</h2>
+    <p>{differs}</p>
     <p class="sub" style="margin-top:1rem">
       Built on {frameworks}. Original tools that operationalise the published
       standards and point to the free official sources.
     </p>
+  </section>
+
+  <section class="card faq" style="margin-top:1.5rem">
+    <h2>Frequently asked questions</h2>
+{faq}
   </section>
 
   <div class="hr"></div>
@@ -330,6 +381,8 @@ def build_book(b, siblings):
            templates=templates, audience=html.escape(b["audience"]),
            buy=BUY % b["asin"], problem=html.escape(b["problem"]),
            approach=html.escape(b["approach"]), outcomes=outcomes,
+           who=who, not_for=html.escape(d["not_for"]), inside=inside,
+           differs=html.escape(d["differs"]), faq=faq,
            frameworks=frameworks, related=related, footer=FOOTER)
 
 

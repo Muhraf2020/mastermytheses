@@ -62,6 +62,62 @@
   ]
 }
   </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What if my data are secondary and messy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That is the normal case in population work, and it has its own chapter. Data you did not collect and cannot re-collect changes what you can claim, and the honest handling of missingness, linkage and definition changes over time is treated as part of the method rather than as a limitation to be confessed at the end."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is this different from clinical research design?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The unit of analysis, and the audience. Population-level questions bring sampling frames, ecological inference and equity into the design itself, and the findings usually have to persuade commissioners and policymakers as well as reviewers. If your question is about individual patient care, the clinical design guide fits better."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the code maintained?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The code is written to be readable and adapted rather than run blind, using stable core libraries in R and Python instead of fast-moving packages. If you work in Stata or SPSS the workflow still holds; you would translate the steps rather than the syntax."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to know R or Python already?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The code is provided and runnable, with enough explanation to adapt it. If you prefer another tool the workflow still holds — the code is an accelerator, not the method."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this suitable for a thesis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, and it is written with that in mind: the workflow produces the artefacts a committee expects, in the order they expect them. Check your programme's specific requirements against the reporting chapter."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does equity-centred actually mean here?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That disaggregation, the choice of comparison groups, and who is represented in the data are treated as design decisions made at the start, rather than caveats added to the discussion once the analysis is done."
+      }
+    }
+  ]
+}
+  </script>
 </head>
 <body>
   <header class="site">
@@ -99,6 +155,32 @@
   </section>
 
   <section class="card inside" style="margin-top:1.25rem">
+    <h2>Who it is for</h2>
+    <ul class="feature-list">
+      <li>Public health students and MPH candidates</li>
+      <li>Practitioners building evidence for programmes or policy</li>
+      <li>Anyone working with population-level or secondary data</li>
+    </ul>
+    <p><strong>Who should look elsewhere.</strong> This is population-level work. If your question is about individual clinical care or a single service, the clinical research design guide fits better. If you need a systematic review rather than primary data, that is a different book.</p>
+  </section>
+
+  <section class="card inside" style="margin-top:1.25rem">
+    <h2>What is inside</h2>
+    <ul class="feature-list">
+      <li>Turning community and system problems into precise research questions</li>
+      <li>Choosing among cross-sectional, cohort, trial, qualitative and mixed-methods designs</li>
+      <li>Ethics and data governance appropriate to population data</li>
+      <li>Equity built into the design rather than added in the discussion</li>
+      <li>Working with messy secondary and administrative data</li>
+      <li>Sampling frames for populations rather than clinic lists, and what each one excludes</li>
+      <li>Measurement at population level: routine indicators, survey instruments, and their limits</li>
+      <li>Analysis with runnable code in R and Python, not pseudocode</li>
+      <li>Reporting aimed at programmes and policy audiences as well as journals</li>
+      <li>Turning findings into a brief a commissioner will read, alongside the paper</li>
+    </ul>
+  </section>
+
+  <section class="card inside" style="margin-top:1.25rem">
     <h2>What you will have finished</h2>
     <ul class="feature-list">
       <li>Community and system problems turned into precise research questions</li>
@@ -106,10 +188,43 @@
       <li>An ethics and data-governance plan appropriate to population data</li>
       <li>Analysis you can actually run, and reporting aimed at programmes and policy</li>
     </ul>
+  </section>
+
+  <section class="card inside" style="margin-top:1.25rem">
+    <h2>What this adds to the free guidance</h2>
+    <p>Population-level research carries constraints a general methods text does not cover: equity as a design question rather than a limitation, secondary data you did not collect and cannot re-collect, and findings that must persuade commissioners and policymakers rather than only reviewers. This follows one workflow — problem, question, design, data, analysis, reporting — with checklists, decision trees and code you can actually run.</p>
     <p class="sub" style="margin-top:1rem">
       Built on R, Python. Original tools that operationalise the published
       standards and point to the free official sources.
     </p>
+  </section>
+
+  <section class="card faq" style="margin-top:1.5rem">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>What if my data are secondary and messy?</summary>
+      <p>That is the normal case in population work, and it has its own chapter. Data you did not collect and cannot re-collect changes what you can claim, and the honest handling of missingness, linkage and definition changes over time is treated as part of the method rather than as a limitation to be confessed at the end.</p>
+    </details>
+    <details>
+      <summary>How is this different from clinical research design?</summary>
+      <p>The unit of analysis, and the audience. Population-level questions bring sampling frames, ecological inference and equity into the design itself, and the findings usually have to persuade commissioners and policymakers as well as reviewers. If your question is about individual patient care, the clinical design guide fits better.</p>
+    </details>
+    <details>
+      <summary>Is the code maintained?</summary>
+      <p>The code is written to be readable and adapted rather than run blind, using stable core libraries in R and Python instead of fast-moving packages. If you work in Stata or SPSS the workflow still holds; you would translate the steps rather than the syntax.</p>
+    </details>
+    <details>
+      <summary>Do I need to know R or Python already?</summary>
+      <p>No. The code is provided and runnable, with enough explanation to adapt it. If you prefer another tool the workflow still holds — the code is an accelerator, not the method.</p>
+    </details>
+    <details>
+      <summary>Is this suitable for a thesis?</summary>
+      <p>Yes, and it is written with that in mind: the workflow produces the artefacts a committee expects, in the order they expect them. Check your programme&#x27;s specific requirements against the reporting chapter.</p>
+    </details>
+    <details>
+      <summary>What does equity-centred actually mean here?</summary>
+      <p>That disaggregation, the choice of comparison groups, and who is represented in the data are treated as design decisions made at the start, rather than caveats added to the discussion once the analysis is done.</p>
+    </details>
   </section>
 
   <div class="hr"></div>
