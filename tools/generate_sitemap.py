@@ -20,7 +20,18 @@ def is_ignored(p: Path) -> bool:
     parts = p.parts
     if ".github" in parts or "node_modules" in parts:
         return True
-    return False
+    # A sitemap should list only canonical, indexable URLs. The nine
+    # books/<slug>.html files are now redirect stubs carrying "noindex" plus a
+    # canonical pointing at gradsummit.com, where those titles actually live.
+    # Listing them would ask Google to index pages that tell it not to.
+    # 404.html is likewise not a destination.
+    if p.name == "404.html":
+        return True
+    try:
+        head = p.read_text(encoding="utf-8", errors="ignore")[:4000]
+    except OSError:
+        return False
+    return 'name="robots"' in head and "noindex" in head
 
 def last_commit_dt(path: Path):
     """Return last commit datetime (UTC) for file, or None if git not available."""

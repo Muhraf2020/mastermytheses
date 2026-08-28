@@ -1,0 +1,11 @@
+# Local tooling artefacts from `npx wrangler pages dev` / python tooling.
+node_modules/
+.wrangler/
+__pycache__/
+*.pyc
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
