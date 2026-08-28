@@ -476,3 +476,56 @@ footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
   .book-hero-body{ width:100% }
 }
 /* COVERS:END */
+
+/* TOOLS:BEGIN - clinical calculators */
+.card.tool{padding:1.25rem}
+.tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem 1.1rem}
+.tool-grid.wide{grid-template-columns:1fr}
+@media (max-width:640px){ .tool-grid{grid-template-columns:1fr} }
+.tool-grid label{display:flex;flex-direction:column;gap:.3rem;font-weight:600;font-size:.95rem}
+.tool-grid .hint{font-weight:400;color:var(--muted);font-size:.82rem}
+.tool-grid input,.tool-grid select,.tool-grid textarea{
+  padding:.6rem .7rem;font-size:1rem;font-family:inherit;
+  border:1px solid #cbd5e1;border-radius:.5rem;background:#fff;color:inherit;width:100%}
+.tool-grid input:focus,.tool-grid select:focus,.tool-grid textarea:focus{
+  outline:2px solid var(--brand);outline-offset:1px;border-color:var(--brand)}
+.tool-grid textarea{resize:vertical;min-height:6rem}
+
+/* 2x2 contingency table */
+.tool-2x2{overflow-x:auto;margin:0 0 1rem}
+table.matrix{border-collapse:collapse;min-width:340px}
+table.matrix th,table.matrix td{border:1px solid #e2e8f0;padding:.5rem .6rem;text-align:left}
+table.matrix thead th{background:#f1f5f9;font-size:.88rem}
+table.matrix tbody th{background:#f8fafc;font-size:.9rem;white-space:nowrap}
+table.matrix input{width:7rem;padding:.45rem .5rem;border:1px solid #cbd5e1;border-radius:.4rem;font-size:1rem}
+
+/* results */
+.tool-out{margin-top:1.25rem;border-top:1px solid #e2e8f0;padding-top:1rem}
+.tool-out h3{font-size:1rem;margin:1.1rem 0 .45rem}
+.tool-out h3:first-child{margin-top:0}
+.tool-answer{font-size:1.15rem;font-weight:600;line-height:1.45;margin:.2rem 0 .6rem}
+.tool-code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9rem;
+  background:#f8fafc;border:1px solid #e2e8f0;border-radius:.5rem;padding:.7rem .8rem;
+  overflow-x:auto;word-break:break-word}
+.tool-warn{background:#fff7ed;border-left:4px solid #f59e0b;padding:.7rem .85rem;
+  border-radius:.4rem;margin:.8rem 0}
+.tool-out .muted,.results .muted{color:var(--muted)}
+table.results{width:100%;border-collapse:collapse;font-size:.94rem;margin:.3rem 0 .5rem}
+table.results th,table.results td{border-bottom:1px solid #eef2f7;padding:.5rem .5rem;text-align:left;vertical-align:top}
+table.results thead th{font-size:.82rem;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+table.results tbody th{font-weight:600}
+table.results .num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.flag{background:#fee2e2;color:#991b1b;border-radius:999px;padding:.15rem .5rem;font-size:.78rem;font-weight:600}
+.runchart{width:100%;height:auto;background:#fff;border:1px solid #e2e8f0;border-radius:.6rem;margin:0 0 .6rem}
+
+/* the book each tool belongs to */
+.card.book-cta{display:flex;gap:1.1rem;align-items:flex-start;margin:1.5rem 0 0;
+  border-left:4px solid var(--brand)}
+.book-cta-cover{flex:0 0 110px;width:110px}
+.book-cta .eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;
+  color:var(--muted);margin:0}
+@media (max-width:640px){
+  .card.book-cta{flex-direction:column}
+  .book-cta-cover{width:120px;flex:none}
+}
+/* TOOLS:END */

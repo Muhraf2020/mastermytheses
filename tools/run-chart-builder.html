@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Run Chart Builder — plot QI data and test it against the runs rules</title>
+  <meta name="description" content="Paste your measurements and get a run chart with the median, plus the shift, trend and runs tests that separate real change from noise. Free, no sign-up.">
+  <link rel="canonical" href="https://www.mastermytheses.com/tools/run-chart-builder.html">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="Rafiq Muhammad, MD, MIHMEP, PhD">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Master My Theses">
+  <meta property="og:title" content="Run Chart Builder — plot QI data and test it against the runs rules">
+  <meta property="og:description" content="Paste your measurements and get a run chart with the median, plus the shift, trend and runs tests that separate real change from noise. Free, no sign-up.">
+  <meta property="og:url" content="https://www.mastermytheses.com/tools/run-chart-builder.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Run Chart Builder — plot QI data and test it against the runs rules">
+  <meta name="twitter:description" content="Paste your measurements and get a run chart with the median, plus the shift, trend and runs tests that separate real change from noise. Free, no sign-up.">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="manifest" href="/site.webmanifest">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Is my quality improvement project actually working?",
+  "url": "https://www.mastermytheses.com/tools/run-chart-builder.html",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Rafiq Muhammad, MD, MIHMEP, PhD"
+  },
+  "description": "Paste your measurements and get a run chart with the median, plus the shift, trend and runs tests that separate real change from noise. Free, no sign-up."
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is a run chart the same as a control chart?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A run chart uses the median and the runs rules and needs no assumption about the distribution. A control chart adds calculated limits based on the variation in the data and detects more kinds of signal, but it needs more points and more care to construct. Start with a run chart."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should the median be recalculated after the change?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For detecting whether a change happened, use the median of the baseline data and extend it forward. Recalculating across the whole series, as this tool does by default, is the right choice when you are simply looking at a process over time and have not yet intervened at a known point."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I measure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Often enough to get ten to twenty points in the life of the project, and at an interval that matches how the process actually varies. Weekly is common for ward-level work. Monthly sampling often means the project ends before the chart can say anything."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "A rule is broken. Does that prove my intervention worked?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It shows the variation is unlikely to be random. It does not establish that your intervention caused it, since something else may have changed at the same time. That is why the annotation on a QI chart, recording what was done and when, matters as much as the points."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.mastermytheses.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Clinical research tools",
+      "item": "https://www.mastermytheses.com/tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Is my quality improvement project actually working?",
+      "item": "https://www.mastermytheses.com/tools/run-chart-builder.html"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <div class="brand"><a href="/" style="color:inherit;text-decoration:none">Master My Theses</a></div>
+      <nav aria-label="Primary">
+        <a href="/">The library</a>
+        <a href="/choose.html">Which book?</a>
+        <a href="/pathways.html">Pathways</a>
+        <a href="/tools/">Tools</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+<main>
+  <div class="breadcrumbs"><a href="/">The library</a> &rsaquo;
+    <a href="/tools/">Tools</a> &rsaquo; <span>Is my quality improvement project actually working?</span></div>
+
+  <h1 class="title" style="font-size:1.9rem;margin:1rem 0 .4rem">Is my quality improvement project actually working?</h1>
+  <p class="sub" style="max-width:72ch">Paste your numbers in order. This draws the run chart and applies the four rules that distinguish a real change from ordinary variation.</p>
+
+  <section class="card tool" id="tool">
+    <div class="tool-grid wide">
+      <label for="data">Your measurements, in time order
+        <span class="hint">one per line, or separated by commas</span>
+        <textarea id="data" rows="6">62, 58, 65, 61, 59, 64, 60, 72, 75, 78, 74, 80, 79, 83</textarea></label>
+      <label for="lbl">What you measured <span class="hint">optional, used as the axis label</span>
+        <input id="lbl" type="text" placeholder="% compliance with the checklist"></label>
+    </div>
+    <div class="actions">
+      <button class="btn" id="go" type="button">Draw the chart</button>
+      <button class="btn secondary" id="reset" type="button">Reset</button>
+    </div>
+    <div id="out" class="tool-out" hidden></div>
+  </section>
+
+  <section class="card inside">
+    <h2>Before and after is not evidence</h2>
+
+    <p>The most common quality improvement error is comparing a mean before an intervention
+    with a mean after it. Both numbers vary week to week on their own. Comparing two points
+    from a wobbling line tells you almost nothing, and it will show an improvement roughly
+    half the time even when nothing was done.</p>
+    <p>A run chart fixes this by plotting every measurement in time order against the median
+    of the whole series, then asking whether the pattern is one that random variation could
+    plausibly produce. Four rules do that work. A <strong>shift</strong> is six or more
+    consecutive points on the same side of the median. A <strong>trend</strong> is five or
+    more consecutive points all rising or all falling. <strong>Too few or too many
+    runs</strong> means the line crosses the median less or more often than chance would
+    predict. And an <strong>astronomical point</strong> is one obviously outside the pattern
+    &mdash; a judgement call, which is why it is not automated here.</p>
+    <p>Points that land exactly on the median are excluded from the counting. They cannot be
+    on either side, and leaving them in inflates the run lengths.</p>
+    <p>You need enough data. Below ten points the rules have very little power, and with
+    fewer than that you will neither detect a real improvement nor be reassured by a null
+    result. Fifteen to twenty points, collected at whatever interval is natural for your
+    process, is the usual advice.</p>
+  </section>
+
+  <section class="card faq" id="faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Is a run chart the same as a control chart?</summary><p>No. A run chart uses the median and the runs rules and needs no assumption about the distribution. A control chart adds calculated limits based on the variation in the data and detects more kinds of signal, but it needs more points and more care to construct. Start with a run chart.</p></details>
+    <details><summary>Should the median be recalculated after the change?</summary><p>For detecting whether a change happened, use the median of the baseline data and extend it forward. Recalculating across the whole series, as this tool does by default, is the right choice when you are simply looking at a process over time and have not yet intervened at a known point.</p></details>
+    <details><summary>How often should I measure?</summary><p>Often enough to get ten to twenty points in the life of the project, and at an interval that matches how the process actually varies. Weekly is common for ward-level work. Monthly sampling often means the project ends before the chart can say anything.</p></details>
+    <details><summary>A rule is broken. Does that prove my intervention worked?</summary><p>It shows the variation is unlikely to be random. It does not establish that your intervention caused it, since something else may have changed at the same time. That is why the annotation on a QI chart, recording what was done and when, matters as much as the points.</p></details>
+  </section>
+
+  <section class="card book-cta">
+    <div class="book-cta-cover"><picture><source type="image/webp" srcset="/assets/img/clinical-audit-quality-improvement-600.webp 600w, /assets/img/clinical-audit-quality-improvement.webp 938w" sizes="120px"><img class="cover" src="/assets/img/clinical-audit-quality-improvement-600.jpg" srcset="/assets/img/clinical-audit-quality-improvement-600.jpg 600w, /assets/img/clinical-audit-quality-improvement.jpg 938w" sizes="120px" width="938" height="1500" loading="lazy" decoding="async" alt="Cover of The Clinical Audit &amp; Quality Improvement Project Workbook"></picture></div>
+    <div>
+      <p class="eyebrow">The book behind this tool</p>
+      <h2 style="font-size:1.15rem;margin:.2rem 0 .4rem"><a href="/books/clinical-audit-quality-improvement.html">The Clinical Audit &amp; Quality Improvement Project Workbook</a></h2>
+      <p class="sub">From a problem you noticed on the ward to a signed-off, portfolio-ready project.</p>
+      <div class="actions">
+        <a class="btn secondary" href="/books/clinical-audit-quality-improvement.html">What&rsquo;s inside</a>
+        <a class="btn" href="https://www.amazon.com/dp/B0H5R9LMYQ" target="_blank" rel="noopener nofollow sponsored">Get it on Amazon</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+  <div class="bottom-nav">
+      <a class="btn secondary" href="/tools/clinical-audit-sample-size.html">How many records to review</a>
+      <a class="btn secondary" href="/tools/pico-question-builder.html">Frame the question first</a>
+      <a class="btn secondary" href="/tools/">All tools</a>
+  </div>
+</main>
+
+<footer>
+  <div class="site-footer-inner">
+    <div class="site-footer-copy">&copy; <span class="footer-year"></span> Rafiq Muhammad, PhD. All rights reserved.</div>
+    <nav class="site-footer-links" aria-label="Footer">
+      <a href="/">The library</a>
+      <a href="/choose.html">Which book?</a>
+      <a href="/pathways.html">Pathways</a>
+      <a href="/tools/">Tools</a>
+      <a href="https://www.gradsummit.com/" rel="noopener">GradSummit</a>
+      <a href="https://researchmadepractical.com/" rel="noopener">Research Made Practical</a>
+    </nav>
+  </div>
+  <script>document.querySelectorAll('.footer-year').forEach(function (el) { el.textContent = new Date().getFullYear(); });</script>
+</footer>
+<script>
+
+  var Z = {0.90: 1.6448536, 0.95: 1.9599640, 0.99: 2.5758293};
+  function num(id){ var v = document.getElementById(id).value.trim();
+    if (v === '') return null; var n = Number(v); return isFinite(n) ? n : null; }
+  function fmt(x, d){ if (x === null || !isFinite(x)) return '\u2014';
+    return x.toFixed(d === undefined ? 2 : d); }
+  function pct(x, d){ if (x === null || !isFinite(x)) return '\u2014';
+    return (100 * x).toFixed(d === undefined ? 1 : d) + '%'; }
+  // Wilson score interval: behaves at 0 and 100%, where the textbook
+  // normal approximation produces impossible bounds.
+  function wilson(k, n, z){
+    if (!n) return [null, null];
+    var p = k / n, d = 1 + z * z / n;
+    var c = (p + z * z / (2 * n)) / d;
+    var h = (z / d) * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n));
+    return [Math.max(0, c - h), Math.min(1, c + h)];
+  }
+  function row(label, value, ci, note){
+    return '<tr><th scope="row">' + label + '</th><td class="num">' + value +
+      '</td><td class="num muted">' + (ci || '') + '</td><td class="muted">' +
+      (note || '') + '</td></tr>';
+  }
+  function warn(msg){
+    return '<p class="tool-warn" role="status">' + msg + '</p>';
+  }
+
+  function parseData(s){
+    return s.split(/[\s,;]+/).map(function(v){ return v.trim(); })
+            .filter(function(v){ return v !== ''; })
+            .map(Number).filter(function(v){ return isFinite(v); });
+  }
+  function median(a){
+    var b = a.slice().sort(function(x, y){ return x - y; }), m = b.length >> 1;
+    return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2;
+  }
+  function chart(v, med, label){
+    var W = 720, H = 300, PL = 48, PR = 16, PT = 16, PB = 34;
+    var lo = Math.min.apply(null, v), hi = Math.max.apply(null, v);
+    if (lo === hi){ lo -= 1; hi += 1; }
+    var pad = (hi - lo) * 0.12; lo -= pad; hi += pad;
+    var x = function(i){ return PL + i * (W - PL - PR) / Math.max(1, v.length - 1); };
+    var y = function(d){ return PT + (hi - d) * (H - PT - PB) / (hi - lo); };
+    var pts = v.map(function(d, i){ return x(i) + ',' + y(d); }).join(' ');
+    var dots = v.map(function(d, i){
+      var above = d > med, below = d < med;
+      var fill = above ? '#0ea5e9' : (below ? '#94a3b8' : '#f59e0b');
+      return '<circle cx="' + x(i) + '" cy="' + y(d) + '" r="4" fill="' + fill + '"><title>Point ' +
+             (i + 1) + ': ' + d + '</title></circle>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="runchart" role="img" aria-label="Run chart of ' +
+      v.length + ' measurements with a median of ' + med + '">' +
+      '<line x1="' + PL + '" y1="' + y(med) + '" x2="' + (W - PR) + '" y2="' + y(med) +
+        '" stroke="#ef4444" stroke-dasharray="6 4" stroke-width="2"/>' +
+      '<text x="' + (W - PR) + '" y="' + (y(med) - 6) + '" text-anchor="end" font-size="12" fill="#ef4444">median ' + med + '</text>' +
+      '<polyline points="' + pts + '" fill="none" stroke="#0f172a" stroke-width="2"/>' + dots +
+      '<line x1="' + PL + '" y1="' + (H - PB) + '" x2="' + (W - PR) + '" y2="' + (H - PB) + '" stroke="#cbd5e1"/>' +
+      '<line x1="' + PL + '" y1="' + PT + '" x2="' + PL + '" y2="' + (H - PB) + '" stroke="#cbd5e1"/>' +
+      '<text x="' + PL + '" y="' + (H - 10) + '" font-size="12" fill="#64748b">point 1</text>' +
+      '<text x="' + (W - PR) + '" y="' + (H - 10) + '" text-anchor="end" font-size="12" fill="#64748b">point ' + v.length + '</text>' +
+      '<text x="6" y="' + (PT + 10) + '" font-size="12" fill="#64748b">' + (label || 'value') + '</text>' +
+      '</svg>';
+  }
+  function analyse(v, med){
+    var useful = v.filter(function(d){ return d !== med; });
+    var n = useful.length;
+    var signs = useful.map(function(d){ return d > med ? 1 : -1; });
+    var runs = 1, longest = 1, cur = 1;
+    for (var i = 1; i < signs.length; i++){
+      if (signs[i] !== signs[i - 1]){ runs++; cur = 1; }
+      else { cur++; if (cur > longest) longest = cur; }
+    }
+    var nAbove = signs.filter(function(s){ return s > 0; }).length;
+    var nBelow = n - nAbove;
+    // trend: consecutive strictly increasing or decreasing points, ties broken
+    var up = 1, down = 1, bestUp = 1, bestDown = 1;
+    for (var j = 1; j < v.length; j++){
+      if (v[j] > v[j - 1]){ up++; down = 1; } else if (v[j] < v[j - 1]){ down++; up = 1; }
+      else { up = 1; down = 1; }
+      if (up > bestUp) bestUp = up;
+      if (down > bestDown) bestDown = down;
+    }
+    var trend = Math.max(bestUp, bestDown);
+    var mu = null, sd = null, loLim = null, hiLim = null;
+    if (nAbove > 0 && nBelow > 0 && n > 1){
+      mu = 2 * nAbove * nBelow / n + 1;
+      sd = Math.sqrt(2 * nAbove * nBelow * (2 * nAbove * nBelow - n) / (n * n * (n - 1)));
+      loLim = mu - 1.96 * sd; hiLim = mu + 1.96 * sd;
+    }
+    return {n: n, runs: runs, longest: longest, trend: trend,
+            lo: loLim, hi: hiLim, nAbove: nAbove, nBelow: nBelow};
+  }
+  function go(){
+    var v = parseData(document.getElementById('data').value);
+    var label = document.getElementById('lbl').value.trim();
+    var out = document.getElementById('out'); out.hidden = false;
+    var notice = '';
+    if (v.length < 10){
+      notice = warn('You have ' + v.length + ' point' + (v.length === 1 ? '' : 's') +
+        '. The runs rules need at least 10 to mean anything, and 15 to 20 is the usual advice.' +
+        (v.length ? ' The chart below is drawn, but treat the tests as indicative only.' : ''));
+      if (!v.length){ out.innerHTML = notice; return; }
+    }
+    var med = median(v), a = analyse(v, med);
+    var signals = [];
+    if (a.longest >= 6) signals.push(['Shift', 'Yes \u2014 ' + a.longest +
+      ' consecutive points on one side of the median', true]);
+    else signals.push(['Shift', 'No \u2014 longest run is ' + a.longest + ' (needs 6)', false]);
+    if (a.trend >= 5) signals.push(['Trend', 'Yes \u2014 ' + a.trend +
+      ' consecutive points all moving one way', true]);
+    else signals.push(['Trend', 'No \u2014 longest is ' + a.trend + ' (needs 5)', false]);
+    if (a.lo !== null){
+      var few = a.runs < a.lo, many = a.runs > a.hi;
+      signals.push(['Number of runs', a.runs + ' observed, ' + a.lo.toFixed(1) + '\u2013' +
+        a.hi.toFixed(1) + ' expected by chance' + (few ? ' \u2014 too few' : (many ? ' \u2014 too many' : ' \u2014 within range')),
+        few || many]);
+    }
+    var any = signals.some(function(s){ return s[2]; });
+    var rows = signals.map(function(s){
+      return '<tr><th scope="row">' + s[0] + '</th><td>' + s[1] + '</td><td>' +
+        (s[2] ? '<span class="flag">signal</span>' : '<span class="muted">no signal</span>') + '</td></tr>';
+    }).join('');
+
+    out.innerHTML = notice + chart(v, med, label) +
+      '<h3>The runs rules</h3><table class="results"><tbody>' + rows + '</tbody></table>' +
+      '<p class="' + (any ? 'tool-answer' : 'muted') + '">' + (any
+        ? 'At least one rule is broken, which is evidence of non-random change \u2014 the '
+          + 'thing you were hoping to see if you made a deliberate improvement.'
+        : 'No rule is broken. Everything here is consistent with ordinary variation, so '
+          + 'there is no evidence yet that anything changed.') + '</p>' +
+      '<p class="muted">' + a.n + ' of ' + v.length + ' points were used for the runs tests; ' +
+      'points sitting exactly on the median are excluded by convention.</p>';
+  }
+  document.getElementById('go').addEventListener('click', go);
+  document.getElementById('reset').addEventListener('click', function(){
+    document.getElementById('data').value = '62, 58, 65, 61, 59, 64, 60, 72, 75, 78, 74, 80, 79, 83';
+    document.getElementById('lbl').value = '';
+    document.getElementById('out').hidden = true;
+  });
+  go();
+
+</script>
+</body>
+</html>

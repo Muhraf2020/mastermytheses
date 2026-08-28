@@ -55,8 +55,15 @@ def iso8601(dt: datetime) -> str:
     return dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 def loc_for(relpath: str) -> str:
-    # index.html -> /
-    return DOMAIN if relpath == "index.html" else urljoin(DOMAIN, relpath)
+    # index.html -> /, and tools/index.html -> /tools/
+    #
+    # The directory form is what each page declares as its canonical, so listing
+    # the index.html form here would submit a URL that points somewhere else.
+    if relpath == "index.html":
+        return DOMAIN
+    if relpath.endswith("/index.html"):
+        return urljoin(DOMAIN, relpath[: -len("index.html")])
+    return urljoin(DOMAIN, relpath)
 
 # Collect pages
 pages = []

@@ -71,6 +71,7 @@ NAV = """  <header class="site">
         <a href="/">The library</a>
         <a href="/choose.html">Which book?</a>
         <a href="/pathways.html">Pathways</a>
+        <a href="/tools/">Tools</a>
         <a href="/about.html">About</a>
       </nav>
     </div>
@@ -83,6 +84,7 @@ FOOTER = """<footer>
       <a href="/">The library</a>
       <a href="/choose.html">Which book?</a>
       <a href="/pathways.html">Pathways</a>
+      <a href="/tools/">Tools</a>
       <a href="https://www.gradsummit.com/" rel="noopener">GradSummit</a>
       <a href="https://researchmadepractical.com/" rel="noopener">Research Made Practical</a>
     </nav>

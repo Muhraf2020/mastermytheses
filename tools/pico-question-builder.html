@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PICO Question Builder — turn a clinical problem into a searchable question</title>
+  <meta name="description" content="Build a PICO question from a clinical problem, then get the Boolean search string to paste straight into PubMed. Free, no sign-up.">
+  <link rel="canonical" href="https://www.mastermytheses.com/tools/pico-question-builder.html">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="Rafiq Muhammad, MD, MIHMEP, PhD">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Master My Theses">
+  <meta property="og:title" content="PICO Question Builder — turn a clinical problem into a searchable question">
+  <meta property="og:description" content="Build a PICO question from a clinical problem, then get the Boolean search string to paste straight into PubMed. Free, no sign-up.">
+  <meta property="og:url" content="https://www.mastermytheses.com/tools/pico-question-builder.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PICO Question Builder — turn a clinical problem into a searchable question">
+  <meta name="twitter:description" content="Build a PICO question from a clinical problem, then get the Boolean search string to paste straight into PubMed. Free, no sign-up.">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="manifest" href="/site.webmanifest">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Turn your clinical problem into a PICO question",
+  "url": "https://www.mastermytheses.com/tools/pico-question-builder.html",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Rafiq Muhammad, MD, MIHMEP, PhD"
+  },
+  "description": "Build a PICO question from a clinical problem, then get the Boolean search string to paste straight into PubMed. Free, no sign-up."
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I always need a comparison?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Prevalence and experience questions often have none, and forcing one in distorts the question. But for any therapy question, leaving the comparison blank usually means you have not yet decided what you are comparing against — and 'usual care' still needs defining, because it varies by ward."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My search returns thousands of results. What now?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Add the comparison term back, then restrict the population. Narrowing the outcome is the last thing to try, because outcome terms are inconsistently indexed and you will lose relevant papers before you lose irrelevant ones."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is PICO the same as PICOT or PECO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They are the same skeleton. PICOT adds an explicit timeframe, useful when the outcome is time-dependent, such as 30-day readmission. PECO swaps Intervention for Exposure and is used for aetiology and harm questions, where nobody assigned the exposure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this for a service evaluation or audit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Partly. An audit compares practice against an agreed standard rather than testing an intervention, so it needs a standard and a sample, not a comparison group. Build the population and outcome here, then move to the audit sample size tool."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.mastermytheses.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Clinical research tools",
+      "item": "https://www.mastermytheses.com/tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Turn your clinical problem into a PICO question",
+      "item": "https://www.mastermytheses.com/tools/pico-question-builder.html"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <div class="brand"><a href="/" style="color:inherit;text-decoration:none">Master My Theses</a></div>
+      <nav aria-label="Primary">
+        <a href="/">The library</a>
+        <a href="/choose.html">Which book?</a>
+        <a href="/pathways.html">Pathways</a>
+        <a href="/tools/">Tools</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+<main>
+  <div class="breadcrumbs"><a href="/">The library</a> &rsaquo;
+    <a href="/tools/">Tools</a> &rsaquo; <span>Turn your clinical problem into a PICO question</span></div>
+
+  <h1 class="title" style="font-size:1.9rem;margin:1rem 0 .4rem">Turn your clinical problem into a PICO question</h1>
+  <p class="sub" style="max-width:72ch">Fill in the four parts and this writes the question your supervisor is asking for — and the PubMed search that goes with it.</p>
+
+  <section class="card tool" id="tool">
+    <div class="tool-grid">
+      <label for="p">Population <span class="hint">who the patients are</span>
+        <input id="p" type="text" placeholder="adults admitted with community-acquired pneumonia"></label>
+      <label for="i">Intervention <span class="hint">what you would do</span>
+        <input id="i" type="text" placeholder="early mobilisation within 24 hours"></label>
+      <label for="c">Comparison <span class="hint">the alternative; leave blank if none</span>
+        <input id="c" type="text" placeholder="usual care"></label>
+      <label for="o">Outcome <span class="hint">what you will measure</span>
+        <input id="o" type="text" placeholder="length of stay"></label>
+      <label for="t">Timeframe <span class="hint">optional</span>
+        <input id="t" type="text" placeholder="within 30 days"></label>
+      <label for="qtype">Question type
+        <select id="qtype">
+          <option value="therapy">Therapy or intervention</option>
+          <option value="diagnosis">Diagnosis</option>
+          <option value="prognosis">Prognosis</option>
+          <option value="aetiology">Aetiology or harm</option>
+          <option value="qualitative">Experience or meaning</option>
+        </select></label>
+    </div>
+    <div class="actions">
+      <button class="btn" id="go" type="button">Build my question</button>
+      <button class="btn secondary" id="reset" type="button">Clear</button>
+    </div>
+    <div id="out" class="tool-out" hidden></div>
+  </section>
+
+  <section class="card inside">
+    <h2>What PICO is actually for</h2>
+
+    <p>PICO is not a formatting exercise. It exists because a vague question cannot be
+    searched and cannot be answered. &ldquo;Does early mobilisation help?&rdquo; has no
+    population, no comparison and no outcome, so there is no set of papers that either
+    supports or refutes it. Every appraisal you attempt afterwards inherits that vagueness.</p>
+    <p>The four parts do specific work. <strong>Population</strong> decides which studies
+    are even eligible. <strong>Intervention</strong> and <strong>Comparison</strong> decide
+    what the effect is measured against &mdash; and &ldquo;usual care&rdquo; is a real
+    comparison that needs defining, because usual care differs between wards.
+    <strong>Outcome</strong> decides what counts as success, and it must be something you
+    can actually obtain from your records.</p>
+    <p>The question type matters more than most people are told. It determines which study
+    design can answer you, and therefore which appraisal checklist applies later. A therapy
+    question appraised with a diagnostic checklist produces a confident, wrong answer.</p>
+    <p>A practical warning about the search: databases index populations and interventions
+    well and outcomes poorly. If your search returns nothing, the outcome term is usually
+    the culprit, not the absence of evidence.</p>
+  </section>
+
+  <section class="card faq" id="faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Do I always need a comparison?</summary><p>No. Prevalence and experience questions often have none, and forcing one in distorts the question. But for any therapy question, leaving the comparison blank usually means you have not yet decided what you are comparing against — and &#x27;usual care&#x27; still needs defining, because it varies by ward.</p></details>
+    <details><summary>My search returns thousands of results. What now?</summary><p>Add the comparison term back, then restrict the population. Narrowing the outcome is the last thing to try, because outcome terms are inconsistently indexed and you will lose relevant papers before you lose irrelevant ones.</p></details>
+    <details><summary>Is PICO the same as PICOT or PECO?</summary><p>They are the same skeleton. PICOT adds an explicit timeframe, useful when the outcome is time-dependent, such as 30-day readmission. PECO swaps Intervention for Exposure and is used for aetiology and harm questions, where nobody assigned the exposure.</p></details>
+    <details><summary>Can I use this for a service evaluation or audit?</summary><p>Partly. An audit compares practice against an agreed standard rather than testing an intervention, so it needs a standard and a sample, not a comparison group. Build the population and outcome here, then move to the audit sample size tool.</p></details>
+  </section>
+
+  <section class="card book-cta">
+    <div class="book-cta-cover"><picture><source type="image/webp" srcset="/assets/img/evidence-based-practice-project-600.webp 600w, /assets/img/evidence-based-practice-project.webp 938w" sizes="120px"><img class="cover" src="/assets/img/evidence-based-practice-project-600.jpg" srcset="/assets/img/evidence-based-practice-project-600.jpg 600w, /assets/img/evidence-based-practice-project.jpg 938w" sizes="120px" width="938" height="1500" loading="lazy" decoding="async" alt="Cover of The Evidence-Based Practice Project Workbook"></picture></div>
+    <div>
+      <p class="eyebrow">The book behind this tool</p>
+      <h2 style="font-size:1.15rem;margin:.2rem 0 .4rem"><a href="/books/evidence-based-practice-project.html">The Evidence-Based Practice Project Workbook</a></h2>
+      <p class="sub">Take a clinical question from PICO to an implemented, evaluated change in practice.</p>
+      <div class="actions">
+        <a class="btn secondary" href="/books/evidence-based-practice-project.html">What&rsquo;s inside</a>
+        <a class="btn" href="https://www.amazon.com/dp/B0H5RR5P97" target="_blank" rel="noopener nofollow sponsored">Get it on Amazon</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+  <div class="bottom-nav">
+      <a class="btn secondary" href="/tools/nnt-absolute-risk-calculator.html">Turn a trial result into an NNT</a>
+      <a class="btn secondary" href="/tools/clinical-audit-sample-size.html">Sizing an audit instead?</a>
+      <a class="btn secondary" href="/tools/">All tools</a>
+  </div>
+</main>
+
+<footer>
+  <div class="site-footer-inner">
+    <div class="site-footer-copy">&copy; <span class="footer-year"></span> Rafiq Muhammad, PhD. All rights reserved.</div>
+    <nav class="site-footer-links" aria-label="Footer">
+      <a href="/">The library</a>
+      <a href="/choose.html">Which book?</a>
+      <a href="/pathways.html">Pathways</a>
+      <a href="/tools/">Tools</a>
+      <a href="https://www.gradsummit.com/" rel="noopener">GradSummit</a>
+      <a href="https://researchmadepractical.com/" rel="noopener">Research Made Practical</a>
+    </nav>
+  </div>
+  <script>document.querySelectorAll('.footer-year').forEach(function (el) { el.textContent = new Date().getFullYear(); });</script>
+</footer>
+<script>
+
+  var Z = {0.90: 1.6448536, 0.95: 1.9599640, 0.99: 2.5758293};
+  function num(id){ var v = document.getElementById(id).value.trim();
+    if (v === '') return null; var n = Number(v); return isFinite(n) ? n : null; }
+  function fmt(x, d){ if (x === null || !isFinite(x)) return '\u2014';
+    return x.toFixed(d === undefined ? 2 : d); }
+  function pct(x, d){ if (x === null || !isFinite(x)) return '\u2014';
+    return (100 * x).toFixed(d === undefined ? 1 : d) + '%'; }
+  // Wilson score interval: behaves at 0 and 100%, where the textbook
+  // normal approximation produces impossible bounds.
+  function wilson(k, n, z){
+    if (!n) return [null, null];
+    var p = k / n, d = 1 + z * z / n;
+    var c = (p + z * z / (2 * n)) / d;
+    var h = (z / d) * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n));
+    return [Math.max(0, c - h), Math.min(1, c + h)];
+  }
+  function row(label, value, ci, note){
+    return '<tr><th scope="row">' + label + '</th><td class="num">' + value +
+      '</td><td class="num muted">' + (ci || '') + '</td><td class="muted">' +
+      (note || '') + '</td></tr>';
+  }
+  function warn(msg){
+    return '<p class="tool-warn" role="status">' + msg + '</p>';
+  }
+
+  var DESIGN = {
+    therapy:    ['randomised controlled trial', 'A randomised controlled trial answers this best. A well-conducted cohort study is the usual fallback.'],
+    diagnosis:  ['cross-sectional study with a reference standard', 'You need consecutive patients who all receive both the new test and the reference standard.'],
+    prognosis:  ['cohort study', 'Follow a defined group forward from a common starting point.'],
+    aetiology:  ['cohort or case-control study', 'Randomising people to a harm is not ethical, so observational designs carry this question.'],
+    qualitative:['qualitative study', 'Ask about experience and meaning, not effect size. Interviews or focus groups, analysed thematically.']
+  };
+  var FILTER = {
+    therapy: '(randomized controlled trial[pt] OR clinical trial[pt])',
+    diagnosis: '(sensitivity and specificity[mh] OR diagnosis[sh])',
+    prognosis: '(cohort studies[mh] OR prognosis[mh])',
+    aetiology: '(cohort studies[mh] OR case-control studies[mh])',
+    qualitative: '(qualitative research[mh] OR interviews as topic[mh])'
+  };
+  function phrase(s){
+    s = s.trim();
+    if (!s) return '';
+    return s.indexOf(' ') > -1 ? '"' + s + '"' : s;
+  }
+  function build(){
+    var p = document.getElementById('p').value.trim(),
+        i = document.getElementById('i').value.trim(),
+        c = document.getElementById('c').value.trim(),
+        o = document.getElementById('o').value.trim(),
+        t = document.getElementById('t').value.trim(),
+        k = document.getElementById('qtype').value;
+    var out = document.getElementById('out');
+    var missing = [];
+    if (!p) missing.push('Population');
+    if (!i) missing.push('Intervention');
+    if (!o) missing.push('Outcome');
+    if (missing.length){
+      out.hidden = false;
+      out.innerHTML = warn('Add ' + missing.join(', ') +
+        ' \u2014 a PICO question needs at least who, what, and what you will measure.');
+      return;
+    }
+    var q = 'In ' + p + ', does ' + i +
+            (c ? ', compared with ' + c : '') +
+            ', affect ' + o + (t ? ' ' + t : '') + '?';
+    var terms = [phrase(p), phrase(i)];
+    if (c) terms.push(phrase(c));
+    terms.push(phrase(o));
+    var search = terms.join(' AND ') + ' AND ' + FILTER[k];
+    var d = DESIGN[k];
+    out.hidden = false;
+    out.innerHTML =
+      '<h3>Your question</h3><p class="tool-answer">' + q + '</p>' +
+      '<h3>Design that answers it</h3><p><strong>' + d[0] + '</strong>. ' + d[1] + '</p>' +
+      '<h3>PubMed search</h3><p class="tool-code">' + search + '</p>' +
+      '<p class="muted">Paste that into PubMed. If it returns nothing, drop the ' +
+      'Outcome term first \u2014 outcomes are the least consistently indexed part of a record. ' +
+      'If it returns thousands, add the Comparison back in.</p>';
+  }
+  document.getElementById('go').addEventListener('click', build);
+  document.getElementById('reset').addEventListener('click', function(){
+    ['p','i','c','o','t'].forEach(function(id){ document.getElementById(id).value = ''; });
+    document.getElementById('out').hidden = true;
+  });
+
+</script>
+</body>
+</html>

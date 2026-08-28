@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NNT and Absolute Risk Calculator — ARR, RRR, relative risk and odds ratio</title>
+  <meta name="description" content="Turn trial event counts into absolute risk reduction, relative risk reduction, NNT and NNH with confidence intervals. Free, no sign-up.">
+  <link rel="canonical" href="https://www.mastermytheses.com/tools/nnt-absolute-risk-calculator.html">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="Rafiq Muhammad, MD, MIHMEP, PhD">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Master My Theses">
+  <meta property="og:title" content="NNT and Absolute Risk Calculator — ARR, RRR, relative risk and odds ratio">
+  <meta property="og:description" content="Turn trial event counts into absolute risk reduction, relative risk reduction, NNT and NNH with confidence intervals. Free, no sign-up.">
+  <meta property="og:url" content="https://www.mastermytheses.com/tools/nnt-absolute-risk-calculator.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NNT and Absolute Risk Calculator — ARR, RRR, relative risk and odds ratio">
+  <meta name="twitter:description" content="Turn trial event counts into absolute risk reduction, relative risk reduction, NNT and NNH with confidence intervals. Free, no sign-up.">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="manifest" href="/site.webmanifest">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "What is the NNT for this trial?",
+  "url": "https://www.mastermytheses.com/tools/nnt-absolute-risk-calculator.html",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Rafiq Muhammad, MD, MIHMEP, PhD"
+  },
+  "description": "Turn trial event counts into absolute risk reduction, relative risk reduction, NNT and NNH with confidence intervals. Free, no sign-up."
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Should I use the odds ratio or the relative risk?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Report the relative risk if you have the raw counts, which you do here. The odds ratio is worth having when you are comparing with a paper that reported one, or when the study was case-control, where relative risk cannot be calculated directly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my NNT have no upper limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because the confidence interval for the absolute risk difference includes zero. As the difference approaches zero, the number you would need to treat approaches infinity. The honest reading is that this trial has not established an effect."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a good NNT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no threshold. It depends entirely on the outcome and the cost of treating. An NNT of 100 is excellent for preventing a stroke with a cheap, safe tablet, and poor for preventing a mild rash with an expensive infusion."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this on a meta-analysis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if you have the pooled event counts. If you have a pooled relative risk and a baseline risk instead, the absolute difference has to be derived from those, and the baseline risk you choose should reflect your own population, not the trials' average."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.mastermytheses.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Clinical research tools",
+      "item": "https://www.mastermytheses.com/tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "What is the NNT for this trial?",
+      "item": "https://www.mastermytheses.com/tools/nnt-absolute-risk-calculator.html"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <div class="brand"><a href="/" style="color:inherit;text-decoration:none">Master My Theses</a></div>
+      <nav aria-label="Primary">
+        <a href="/">The library</a>
+        <a href="/choose.html">Which book?</a>
+        <a href="/pathways.html">Pathways</a>
+        <a href="/tools/">Tools</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+<main>
+  <div class="breadcrumbs"><a href="/">The library</a> &rsaquo;
+    <a href="/tools/">Tools</a> &rsaquo; <span>What is the NNT for this trial?</span></div>
+
+  <h1 class="title" style="font-size:1.9rem;margin:1rem 0 .4rem">What is the NNT for this trial?</h1>
+  <p class="sub" style="max-width:72ch">Enter the events in each arm and this returns absolute and relative risk reduction, the number needed to treat, and why the two look so different.</p>
+
+  <section class="card tool" id="tool">
+    <div class="tool-grid">
+      <label for="te">Treatment group: events <input id="te" type="number" min="0" step="1" value="15"></label>
+      <label for="tn2">Treatment group: total <input id="tn2" type="number" min="1" step="1" value="500"></label>
+      <label for="ce">Control group: events <input id="ce" type="number" min="0" step="1" value="30"></label>
+      <label for="cn">Control group: total <input id="cn" type="number" min="1" step="1" value="500"></label>
+      <label for="conf">Confidence level
+        <select id="conf"><option value="0.95">95%</option><option value="0.90">90%</option>
+        <option value="0.99">99%</option></select></label>
+      <label for="dir">The event is <select id="dir">
+        <option value="bad">something bad (death, readmission)</option>
+        <option value="good">something good (recovery, discharge)</option></select></label>
+    </div>
+    <div class="actions">
+      <button class="btn" id="go" type="button">Calculate</button>
+      <button class="btn secondary" id="reset" type="button">Reset</button>
+    </div>
+    <div id="out" class="tool-out" hidden></div>
+  </section>
+
+  <section class="card inside">
+    <h2>Why relative risk reduction flatters every treatment</h2>
+
+    <p>Run the default numbers. Events fall from 6% to 3%. The relative risk reduction is
+    50% &mdash; the figure that reaches the press release. The absolute risk reduction is
+    3 percentage points, which means about 33 patients must be treated for one to avoid the
+    event. Both numbers describe the same trial honestly. Only one of them tells a patient
+    what to expect.</p>
+    <p>The gap widens as the event becomes rarer. A drop from 0.2% to 0.1% is also a 50%
+    relative reduction, but the NNT is 1,000. This is why relative figures are the ones that
+    get quoted, and why any appraisal checklist worth using asks for the absolute difference.</p>
+    <p>The number needed to treat is just the reciprocal of the absolute risk difference,
+    rounded up, because you cannot treat a fraction of a person. It carries the same
+    uncertainty as that difference, so it needs a confidence interval &mdash; and when the
+    interval for the absolute difference crosses zero, the NNT interval becomes unbounded
+    rather than merely wide. That is a real result, not a computational failure: the trial
+    is compatible with the treatment helping, doing nothing, or harming.</p>
+    <p>Odds ratios appear because logistic regression produces them, not because they are
+    easier to understand. When events are rare the odds ratio is close to the relative risk.
+    When events are common it exaggerates, sometimes badly. If a paper reports only an odds
+    ratio for a common outcome, be careful before you translate it into an NNT.</p>
+  </section>
+
+  <section class="card faq" id="faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Should I use the odds ratio or the relative risk?</summary><p>Report the relative risk if you have the raw counts, which you do here. The odds ratio is worth having when you are comparing with a paper that reported one, or when the study was case-control, where relative risk cannot be calculated directly.</p></details>
+    <details><summary>Why does my NNT have no upper limit?</summary><p>Because the confidence interval for the absolute risk difference includes zero. As the difference approaches zero, the number you would need to treat approaches infinity. The honest reading is that this trial has not established an effect.</p></details>
+    <details><summary>What is a good NNT?</summary><p>There is no threshold. It depends entirely on the outcome and the cost of treating. An NNT of 100 is excellent for preventing a stroke with a cheap, safe tablet, and poor for preventing a mild rash with an expensive infusion.</p></details>
+    <details><summary>Can I use this on a meta-analysis?</summary><p>Only if you have the pooled event counts. If you have a pooled relative risk and a baseline risk instead, the absolute difference has to be derived from those, and the baseline risk you choose should reflect your own population, not the trials&#x27; average.</p></details>
+  </section>
+
+  <section class="card book-cta">
+    <div class="book-cta-cover"><picture><source type="image/webp" srcset="/assets/img/evidence-based-practice-project-600.webp 600w, /assets/img/evidence-based-practice-project.webp 938w" sizes="120px"><img class="cover" src="/assets/img/evidence-based-practice-project-600.jpg" srcset="/assets/img/evidence-based-practice-project-600.jpg 600w, /assets/img/evidence-based-practice-project.jpg 938w" sizes="120px" width="938" height="1500" loading="lazy" decoding="async" alt="Cover of The Evidence-Based Practice Project Workbook"></picture></div>
+    <div>
+      <p class="eyebrow">The book behind this tool</p>
+      <h2 style="font-size:1.15rem;margin:.2rem 0 .4rem"><a href="/books/evidence-based-practice-project.html">The Evidence-Based Practice Project Workbook</a></h2>
+      <p class="sub">Take a clinical question from PICO to an implemented, evaluated change in practice.</p>
+      <div class="actions">
+        <a class="btn secondary" href="/books/evidence-based-practice-project.html">What&rsquo;s inside</a>
+        <a class="btn" href="https://www.amazon.com/dp/B0H5RR5P97" target="_blank" rel="noopener nofollow sponsored">Get it on Amazon</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+  <div class="bottom-nav">
+      <a class="btn secondary" href="/tools/pico-question-builder.html">Build the question first</a>
+      <a class="btn secondary" href="/tools/diagnostic-test-calculator.html">Sensitivity, specificity and PPV</a>
+      <a class="btn secondary" href="/tools/">All tools</a>
+  </div>
+</main>
+
+<footer>
+  <div class="site-footer-inner">
+    <div class="site-footer-copy">&copy; <span class="footer-year"></span> Rafiq Muhammad, PhD. All rights reserved.</div>
+    <nav class="site-footer-links" aria-label="Footer">
+      <a href="/">The library</a>
+      <a href="/choose.html">Which book?</a>
+      <a href="/pathways.html">Pathways</a>
+      <a href="/tools/">Tools</a>
+      <a href="https://www.gradsummit.com/" rel="noopener">GradSummit</a>
+      <a href="https://researchmadepractical.com/" rel="noopener">Research Made Practical</a>
+    </nav>
+  </div>
+  <script>document.querySelectorAll('.footer-year').forEach(function (el) { el.textContent = new Date().getFullYear(); });</script>
+</footer>
+<script>
+
+  var Z = {0.90: 1.6448536, 0.95: 1.9599640, 0.99: 2.5758293};
+  function num(id){ var v = document.getElementById(id).value.trim();
+    if (v === '') return null; var n = Number(v); return isFinite(n) ? n : null; }
+  function fmt(x, d){ if (x === null || !isFinite(x)) return '\u2014';
+    return x.toFixed(d === undefined ? 2 : d); }
+  function pct(x, d){ if (x === null || !isFinite(x)) return '\u2014';
+    return (100 * x).toFixed(d === undefined ? 1 : d) + '%'; }
+  // Wilson score interval: behaves at 0 and 100%, where the textbook
+  // normal approximation produces impossible bounds.
+  function wilson(k, n, z){
+    if (!n) return [null, null];
+    var p = k / n, d = 1 + z * z / n;
+    var c = (p + z * z / (2 * n)) / d;
+    var h = (z / d) * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n));
+    return [Math.max(0, c - h), Math.min(1, c + h)];
+  }
+  function row(label, value, ci, note){
+    return '<tr><th scope="row">' + label + '</th><td class="num">' + value +
+      '</td><td class="num muted">' + (ci || '') + '</td><td class="muted">' +
+      (note || '') + '</td></tr>';
+  }
+  function warn(msg){
+    return '<p class="tool-warn" role="status">' + msg + '</p>';
+  }
+
+  function calc(){
+    var a = num('te'), n1 = num('tn2'), c = num('ce'), n2 = num('cn');
+    var z = Z[Number(document.getElementById('conf').value)];
+    var bad = document.getElementById('dir').value === 'bad';
+    var out = document.getElementById('out'); out.hidden = false;
+    if (a === null || c === null || !n1 || !n2){
+      out.innerHTML = warn('Fill in events and totals for both groups.'); return; }
+    if (a > n1 || c > n2){
+      out.innerHTML = warn('A group cannot have more events than participants.'); return; }
+
+    var eer = a / n1, cer = c / n2;
+    var arr = cer - eer;                       // positive = treatment had fewer events
+    var rr  = cer ? eer / cer : null;
+    var rrr = cer ? arr / cer : null;
+    var seARR = Math.sqrt(eer * (1 - eer) / n1 + cer * (1 - cer) / n2);
+    var lo = arr - z * seARR, hi = arr + z * seARR;
+
+    var b = n1 - a, d = n2 - c;
+    var or = (b && c) ? (a * d) / (b * c) : null;
+    var seLogOR = (a && b && c && d) ? Math.sqrt(1/a + 1/b + 1/c + 1/d) : null;
+    var seLogRR = (a && c) ? Math.sqrt(1/a - 1/n1 + 1/c - 1/n2) : null;
+
+    var helps = bad ? arr > 0 : arr < 0;
+    var mag = Math.abs(arr);
+    var nnt = mag > 0 ? 1 / mag : null;
+    var label = helps ? 'NNT (number needed to treat)' : 'NNH (number needed to harm)';
+
+    var nntCI = '';
+    if (lo < 0 && hi > 0){
+      nntCI = 'interval crosses no effect';
+    } else if (mag > 0){
+      var x = 1 / Math.abs(hi), y = 1 / Math.abs(lo);
+      nntCI = fmt(Math.min(x, y), 0) + ' to ' + fmt(Math.max(x, y), 0);
+    }
+    var ciTxt = function(v, se){ return (v && se) ?
+      fmt(v * Math.exp(-z * se)) + ' to ' + fmt(v * Math.exp(z * se)) : ''; };
+
+    out.innerHTML =
+      '<h3>Risk in each arm</h3><table class="results"><tbody>' +
+      row('Control event rate', pct(cer), '', c + ' of ' + n2) +
+      row('Treatment event rate', pct(eer), '', a + ' of ' + n1) +
+      '</tbody></table>' +
+      '<h3>The effect</h3><table class="results"><thead><tr><th>Measure</th>' +
+      '<th class="num">Value</th><th class="num">CI</th><th>Reading</th></tr></thead><tbody>' +
+      row('Absolute risk difference', pct(Math.abs(arr)),
+          pct(Math.min(Math.abs(lo), Math.abs(hi))) + ' to ' + pct(Math.max(Math.abs(lo), Math.abs(hi))),
+          helps ? 'fewer events on treatment' : 'more events on treatment') +
+      row('Relative risk reduction', rrr === null ? '\u2014' : pct(Math.abs(rrr)), '',
+          'the impressive-looking number') +
+      row('Relative risk', fmt(rr), ciTxt(rr, seLogRR), rr < 1 ? 'treatment lowers risk' : 'treatment raises risk') +
+      row('Odds ratio', fmt(or), ciTxt(or, seLogOR), 'overstates the effect when events are common') +
+      row(label, nnt === null ? '\u2014' : fmt(Math.ceil(nnt), 0), nntCI,
+          'patients treated for one extra ' + (helps ? 'benefit' : 'harm')) +
+      '</tbody></table>' +
+      (lo < 0 && hi > 0 ? warn('The confidence interval for the absolute difference includes ' +
+        'zero, so this trial is compatible with no effect. An NNT quoted from it is not ' +
+        'meaningfully bounded.') : '') +
+      '<p class="muted">Same data, two stories: a relative reduction of ' +
+      (rrr === null ? '\u2014' : pct(Math.abs(rrr))) + ' sounds far larger than an absolute ' +
+      'reduction of ' + pct(Math.abs(arr)) + '. Both are correct. Only the absolute figure ' +
+      'tells your patient what they can expect.</p>';
+  }
+  document.getElementById('go').addEventListener('click', calc);
+  document.getElementById('reset').addEventListener('click', function(){
+    document.getElementById('te').value = 15; document.getElementById('tn2').value = 500;
+    document.getElementById('ce').value = 30; document.getElementById('cn').value = 500;
+    document.getElementById('out').hidden = true;
+  });
+  calc();
+
+</script>
+</body>
+</html>

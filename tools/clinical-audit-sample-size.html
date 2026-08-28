@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clinical Audit Sample Size Calculator — how many notes do you need?</title>
+  <meta name="description" content="Work out how many records to review for a clinical audit, with the finite population correction most calculators leave out. Free, no sign-up.">
+  <link rel="canonical" href="https://www.mastermytheses.com/tools/clinical-audit-sample-size.html">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="Rafiq Muhammad, MD, MIHMEP, PhD">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Master My Theses">
+  <meta property="og:title" content="Clinical Audit Sample Size Calculator — how many notes do you need?">
+  <meta property="og:description" content="Work out how many records to review for a clinical audit, with the finite population correction most calculators leave out. Free, no sign-up.">
+  <meta property="og:url" content="https://www.mastermytheses.com/tools/clinical-audit-sample-size.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Clinical Audit Sample Size Calculator — how many notes do you need?">
+  <meta name="twitter:description" content="Work out how many records to review for a clinical audit, with the finite population correction most calculators leave out. Free, no sign-up.">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="manifest" href="/site.webmanifest">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "How many notes do I need to review?",
+  "url": "https://www.mastermytheses.com/tools/clinical-audit-sample-size.html",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Rafiq Muhammad, MD, MIHMEP, PhD"
+  },
+  "description": "Work out how many records to review for a clinical audit, with the finite population correction most calculators leave out. Free, no sign-up."
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does 50% expected compliance need the biggest sample?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because the variance of a proportion is largest at 50% and shrinks as you move towards 0 or 100%. If you genuinely do not know what to expect, 50% is the conservative entry: it will never leave you under-sampled."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a minimum sample for an audit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No universal one, though many departments default to 20 or 50 out of habit. The table above shows what those conventional numbers actually buy you in precision, which is usually less than people assume."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My whole population is only 30 cases. What then?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Review all of them. Below roughly 50 eligible cases, sampling saves little effort and costs you the ability to state a margin of error at all."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this apply to the re-audit as well?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, and use the same margin of error both times. If the first cycle had ±10 points and the second ±20, an apparent improvement may be nothing more than the wider interval on the second sample."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.mastermytheses.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Clinical research tools",
+      "item": "https://www.mastermytheses.com/tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How many notes do I need to review?",
+      "item": "https://www.mastermytheses.com/tools/clinical-audit-sample-size.html"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <div class="brand"><a href="/" style="color:inherit;text-decoration:none">Master My Theses</a></div>
+      <nav aria-label="Primary">
+        <a href="/">The library</a>
+        <a href="/choose.html">Which book?</a>
+        <a href="/pathways.html">Pathways</a>
+        <a href="/tools/">Tools</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+<main>
+  <div class="breadcrumbs"><a href="/">The library</a> &rsaquo;
+    <a href="/tools/">Tools</a> &rsaquo; <span>How many notes do I need to review?</span></div>
+
+  <h1 class="title" style="font-size:1.9rem;margin:1rem 0 .4rem">How many notes do I need to review?</h1>
+  <p class="sub" style="max-width:72ch">Audit sample size is not a power calculation. This works out how many records give you a compliance figure precise enough to act on.</p>
+
+  <section class="card tool" id="tool">
+    <div class="tool-grid">
+      <label for="N">Eligible cases in the period <span class="hint">your whole population</span>
+        <input id="N" type="number" min="1" step="1" value="400"></label>
+      <label for="p">Expected compliance <span class="hint">%, best guess; use 50 if unsure</span>
+        <input id="p" type="number" min="1" max="99" step="1" value="70"></label>
+      <label for="e">Acceptable margin of error <span class="hint">± percentage points</span>
+        <input id="e" type="number" min="1" max="25" step="1" value="10"></label>
+      <label for="conf">Confidence level
+        <select id="conf"><option value="0.95">95%</option><option value="0.90">90%</option>
+        <option value="0.99">99%</option></select></label>
+    </div>
+    <div class="actions">
+      <button class="btn" id="go" type="button">Calculate</button>
+      <button class="btn secondary" id="reset" type="button">Reset</button>
+    </div>
+    <div id="out" class="tool-out" hidden></div>
+  </section>
+
+  <section class="card inside">
+    <h2>Audit sample size is a precision problem, not a power problem</h2>
+
+    <p>Most sample size calculators answer a different question from the one an audit asks.
+    They size a study to detect a difference between two groups. An audit has no second
+    group: it compares one population against an agreed standard, and what you need is a
+    compliance figure precise enough that people will act on it.</p>
+    <p>So the inputs are different. You need the number of eligible cases in the period,
+    a guess at compliance, and the margin of error you can live with. If you have no idea
+    what compliance will be, enter 50% &mdash; that is the value that requires the largest
+    sample, so it is the safe assumption.</p>
+    <p>The finite population correction matters here and is missing from most online
+    calculators. Those assume you are sampling from an effectively infinite population. An
+    audit samples from a known, often small, list &mdash; every caesarean section last
+    quarter, every discharge summary in March. When your sample is a large fraction of that
+    list, the correction reduces the number you need substantially, sometimes by half.</p>
+    <p>One caution that no formula can fix: this arithmetic assumes a random sample. Pulling
+    the most recent fifty notes, or the ones that happen to be on the ward, produces a number
+    with no defensible margin of error at all. Number your eligible cases and select with a
+    random sequence.</p>
+  </section>
+
+  <section class="card faq" id="faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Why does 50% expected compliance need the biggest sample?</summary><p>Because the variance of a proportion is largest at 50% and shrinks as you move towards 0 or 100%. If you genuinely do not know what to expect, 50% is the conservative entry: it will never leave you under-sampled.</p></details>
+    <details><summary>Is there a minimum sample for an audit?</summary><p>No universal one, though many departments default to 20 or 50 out of habit. The table above shows what those conventional numbers actually buy you in precision, which is usually less than people assume.</p></details>
+    <details><summary>My whole population is only 30 cases. What then?</summary><p>Review all of them. Below roughly 50 eligible cases, sampling saves little effort and costs you the ability to state a margin of error at all.</p></details>
+    <details><summary>Does this apply to the re-audit as well?</summary><p>Yes, and use the same margin of error both times. If the first cycle had ±10 points and the second ±20, an apparent improvement may be nothing more than the wider interval on the second sample.</p></details>
+  </section>
+
+  <section class="card book-cta">
+    <div class="book-cta-cover"><picture><source type="image/webp" srcset="/assets/img/clinical-audit-quality-improvement-600.webp 600w, /assets/img/clinical-audit-quality-improvement.webp 938w" sizes="120px"><img class="cover" src="/assets/img/clinical-audit-quality-improvement-600.jpg" srcset="/assets/img/clinical-audit-quality-improvement-600.jpg 600w, /assets/img/clinical-audit-quality-improvement.jpg 938w" sizes="120px" width="938" height="1500" loading="lazy" decoding="async" alt="Cover of The Clinical Audit &amp; Quality Improvement Project Workbook"></picture></div>
+    <div>
+      <p class="eyebrow">The book behind this tool</p>
+      <h2 style="font-size:1.15rem;margin:.2rem 0 .4rem"><a href="/books/clinical-audit-quality-improvement.html">The Clinical Audit &amp; Quality Improvement Project Workbook</a></h2>
+      <p class="sub">From a problem you noticed on the ward to a signed-off, portfolio-ready project.</p>
+      <div class="actions">
+        <a class="btn secondary" href="/books/clinical-audit-quality-improvement.html">What&rsquo;s inside</a>
+        <a class="btn" href="https://www.amazon.com/dp/B0H5R9LMYQ" target="_blank" rel="noopener nofollow sponsored">Get it on Amazon</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+  <div class="bottom-nav">
+      <a class="btn secondary" href="/tools/run-chart-builder.html">Plot the data once you have it</a>
+      <a class="btn secondary" href="/tools/pico-question-builder.html">If it is a question, not a standard</a>
+      <a class="btn secondary" href="/tools/">All tools</a>
+  </div>
+</main>
+
+<footer>
+  <div class="site-footer-inner">
+    <div class="site-footer-copy">&copy; <span class="footer-year"></span> Rafiq Muhammad, PhD. All rights reserved.</div>
+    <nav class="site-footer-links" aria-label="Footer">
+      <a href="/">The library</a>
+      <a href="/choose.html">Which book?</a>
+      <a href="/pathways.html">Pathways</a>
+      <a href="/tools/">Tools</a>
+      <a href="https://www.gradsummit.com/" rel="noopener">GradSummit</a>
+      <a href="https://researchmadepractical.com/" rel="noopener">Research Made Practical</a>
+    </nav>
+  </div>
+  <script>document.querySelectorAll('.footer-year').forEach(function (el) { el.textContent = new Date().getFullYear(); });</script>
+</footer>
+<script>
+
+  var Z = {0.90: 1.6448536, 0.95: 1.9599640, 0.99: 2.5758293};
+  function num(id){ var v = document.getElementById(id).value.trim();
+    if (v === '') return null; var n = Number(v); return isFinite(n) ? n : null; }
+  function fmt(x, d){ if (x === null || !isFinite(x)) return '\u2014';
+    return x.toFixed(d === undefined ? 2 : d); }
+  function pct(x, d){ if (x === null || !isFinite(x)) return '\u2014';
+    return (100 * x).toFixed(d === undefined ? 1 : d) + '%'; }
+  // Wilson score interval: behaves at 0 and 100%, where the textbook
+  // normal approximation produces impossible bounds.
+  function wilson(k, n, z){
+    if (!n) return [null, null];
+    var p = k / n, d = 1 + z * z / n;
+    var c = (p + z * z / (2 * n)) / d;
+    var h = (z / d) * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n));
+    return [Math.max(0, c - h), Math.min(1, c + h)];
+  }
+  function row(label, value, ci, note){
+    return '<tr><th scope="row">' + label + '</th><td class="num">' + value +
+      '</td><td class="num muted">' + (ci || '') + '</td><td class="muted">' +
+      (note || '') + '</td></tr>';
+  }
+  function warn(msg){
+    return '<p class="tool-warn" role="status">' + msg + '</p>';
+  }
+
+  function calc(){
+    var N = num('N'), p = num('p'), e = num('e');
+    var z = Z[Number(document.getElementById('conf').value)];
+    var out = document.getElementById('out'); out.hidden = false;
+    if (!N || p === null || e === null || p <= 0 || p >= 100 || e <= 0){
+      out.innerHTML = warn('Enter the number of eligible cases, an expected compliance ' +
+        'between 1 and 99%, and a margin of error above zero.'); return; }
+    var q = p / 100, m = e / 100;
+    var n0 = z * z * q * (1 - q) / (m * m);
+    var n  = n0 / (1 + (n0 - 1) / N);
+    var need = Math.min(N, Math.ceil(n));
+    var frac = need / N;
+
+    var note = '';
+    if (need >= N){
+      note = warn('The precision you asked for needs your entire population. Review all ' +
+        N + ' cases, or accept a wider margin of error.');
+    } else if (frac > 0.5){
+      note = warn('This is over half your eligible cases. Reviewing all ' + N +
+        ' may cost little more and removes sampling error entirely.');
+    }
+    // what a smaller, commonly used sample would actually buy you
+    var rows = '';
+    [20, 30, 50, 100].forEach(function(s){
+      if (s >= N) return;
+      var se = Math.sqrt(q * (1 - q) / s) * Math.sqrt((N - s) / (N - 1));
+      rows += row(s + ' records', '\u00b1' + (100 * z * se).toFixed(1) + ' points', '',
+        s < need ? 'less precise than you asked for' : 'meets your target');
+    });
+
+    out.innerHTML =
+      '<h3>Review ' + need + ' records</h3>' +
+      '<p class="tool-answer">' + need + ' of ' + N + ' eligible cases (' +
+      (100 * frac).toFixed(0) + '%)</p>' +
+      '<p>That gives you a compliance estimate of roughly ' + p + '% \u00b1 ' + e +
+      ' percentage points at ' + (100 * Number(document.getElementById('conf').value)) +
+      '% confidence.</p>' + note +
+      '<h3>What other sample sizes would buy you</h3>' +
+      '<table class="results"><thead><tr><th>Sample</th><th class="num">Margin of error</th>' +
+      '<th class="num"></th><th></th></tr></thead><tbody>' + rows + '</tbody></table>' +
+      '<p class="muted">Margins assume simple random sampling from your ' + N +
+      ' cases, with the finite population correction applied. Taking the first ' + need +
+      ' notes on the pile is not random and will not deliver this precision.</p>';
+  }
+  document.getElementById('go').addEventListener('click', calc);
+  document.getElementById('reset').addEventListener('click', function(){
+    document.getElementById('N').value = 400; document.getElementById('p').value = 70;
+    document.getElementById('e').value = 10; document.getElementById('out').hidden = true;
+  });
+  calc();
+
+</script>
+</body>
+</html>

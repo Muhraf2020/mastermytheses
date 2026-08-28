@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diagnostic Test Calculator — sensitivity, specificity, PPV, NPV and likelihood ratios</title>
+  <meta name="description" content="Enter a 2×2 table and get sensitivity, specificity, PPV, NPV, likelihood ratios and accuracy with confidence intervals. Free, no sign-up.">
+  <link rel="canonical" href="https://www.mastermytheses.com/tools/diagnostic-test-calculator.html">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="Rafiq Muhammad, MD, MIHMEP, PhD">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Master My Theses">
+  <meta property="og:title" content="Diagnostic Test Calculator — sensitivity, specificity, PPV, NPV and likelihood ratios">
+  <meta property="og:description" content="Enter a 2×2 table and get sensitivity, specificity, PPV, NPV, likelihood ratios and accuracy with confidence intervals. Free, no sign-up.">
+  <meta property="og:url" content="https://www.mastermytheses.com/tools/diagnostic-test-calculator.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Diagnostic Test Calculator — sensitivity, specificity, PPV, NPV and likelihood ratios">
+  <meta name="twitter:description" content="Enter a 2×2 table and get sensitivity, specificity, PPV, NPV, likelihood ratios and accuracy with confidence intervals. Free, no sign-up.">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="manifest" href="/site.webmanifest">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Sensitivity, specificity, PPV and NPV from a 2×2 table",
+  "url": "https://www.mastermytheses.com/tools/diagnostic-test-calculator.html",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Rafiq Muhammad, MD, MIHMEP, PhD"
+  },
+  "description": "Enter a 2×2 table and get sensitivity, specificity, PPV, NPV, likelihood ratios and accuracy with confidence intervals. Free, no sign-up."
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which confidence interval does this use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Wilson score interval for proportions, and the log method for likelihood ratios. Wilson is used deliberately: the normal approximation taught in most courses produces impossible bounds below 0 or above 100% when a proportion is near either extreme, which is exactly where diagnostic studies often sit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My specificity is 100% and the likelihood ratio shows a dash. Why?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A positive likelihood ratio is sensitivity divided by the false positive rate. If specificity is exactly 100%, that denominator is zero and the ratio is infinite rather than undefined in a useful sense. It usually means your sample of well patients was too small to observe a false positive, not that the test never produces one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this for a screening programme?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, and you should use the prevalence box when you do. A test validated in a specialist clinic will look far worse in a screening population, and modelling that before you roll out is the whole point."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What sample size do I need for a diagnostic accuracy study?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is driven by the number of patients with the disease, not the total. Precision on sensitivity depends on the diseased column alone, so a large study with few cases still gives a wide interval for sensitivity."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.mastermytheses.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Clinical research tools",
+      "item": "https://www.mastermytheses.com/tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Sensitivity, specificity, PPV and NPV from a 2×2 table",
+      "item": "https://www.mastermytheses.com/tools/diagnostic-test-calculator.html"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <div class="brand"><a href="/" style="color:inherit;text-decoration:none">Master My Theses</a></div>
+      <nav aria-label="Primary">
+        <a href="/">The library</a>
+        <a href="/choose.html">Which book?</a>
+        <a href="/pathways.html">Pathways</a>
+        <a href="/tools/">Tools</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+<main>
+  <div class="breadcrumbs"><a href="/">The library</a> &rsaquo;
+    <a href="/tools/">Tools</a> &rsaquo; <span>Sensitivity, specificity, PPV and NPV from a 2×2 table</span></div>
+
+  <h1 class="title" style="font-size:1.9rem;margin:1rem 0 .4rem">Sensitivity, specificity, PPV and NPV from a 2×2 table</h1>
+  <p class="sub" style="max-width:72ch">Enter the four counts and this returns every diagnostic accuracy measure with confidence intervals — and shows why PPV changes when prevalence does.</p>
+
+  <section class="card tool" id="tool">
+    <p class="muted" style="margin-top:0">Enter counts from your study. Rows are the test
+    result, columns are the reference standard.</p>
+    <div class="tool-2x2">
+      <table class="matrix">
+        <thead><tr><th></th><th scope="col">Disease present</th><th scope="col">Disease absent</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Test positive</th>
+              <td><input id="tp" type="number" min="0" step="1" value="80" aria-label="True positives"></td>
+              <td><input id="fp" type="number" min="0" step="1" value="40" aria-label="False positives"></td></tr>
+          <tr><th scope="row">Test negative</th>
+              <td><input id="fn" type="number" min="0" step="1" value="20" aria-label="False negatives"></td>
+              <td><input id="tn" type="number" min="0" step="1" value="860" aria-label="True negatives"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tool-grid">
+      <label for="conf">Confidence level
+        <select id="conf"><option value="0.95">95%</option><option value="0.90">90%</option>
+        <option value="0.99">99%</option></select></label>
+      <label for="prev">Recalculate PPV/NPV at a different prevalence <span class="hint">optional, %</span>
+        <input id="prev" type="number" min="0" max="100" step="0.1" placeholder="e.g. 2"></label>
+    </div>
+    <div class="actions">
+      <button class="btn" id="go" type="button">Calculate</button>
+      <button class="btn secondary" id="reset" type="button">Reset</button>
+    </div>
+    <div id="out" class="tool-out" hidden></div>
+  </section>
+
+  <section class="card inside">
+    <h2>Why PPV is not a property of the test</h2>
+
+    <p>Sensitivity and specificity describe the test. Move the same assay to another
+    hospital and they stay roughly the same. Predictive values describe the test
+    <em>in a particular population</em>, and they move sharply with prevalence.</p>
+    <p>Work the default numbers. In that sample, prevalence is 10%, and a positive result
+    is right two thirds of the time. Put the identical test into a screening programme
+    where prevalence is 2%, and the positive predictive value collapses — most positives
+    become false positives, because there are so many more well people to draw them from.
+    Nothing about the test changed. Only the population did.</p>
+    <p>This is why likelihood ratios are worth learning. They combine sensitivity and
+    specificity into one number per result, and they can be applied to whatever pre-test
+    probability your patient actually has. As a rough guide, a positive likelihood ratio
+    above 10 meaningfully rules a diagnosis in, and a negative likelihood ratio below 0.1
+    meaningfully rules it out. Between 0.5 and 2, the test has barely changed what you
+    believed before you ordered it.</p>
+    <p>Accuracy — the proportion of all results that were correct — is the number
+    most often quoted and least often useful. In a rare disease, a test that calls everyone
+    negative achieves high accuracy and finds nobody.</p>
+  </section>
+
+  <section class="card faq" id="faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Which confidence interval does this use?</summary><p>The Wilson score interval for proportions, and the log method for likelihood ratios. Wilson is used deliberately: the normal approximation taught in most courses produces impossible bounds below 0 or above 100% when a proportion is near either extreme, which is exactly where diagnostic studies often sit.</p></details>
+    <details><summary>My specificity is 100% and the likelihood ratio shows a dash. Why?</summary><p>A positive likelihood ratio is sensitivity divided by the false positive rate. If specificity is exactly 100%, that denominator is zero and the ratio is infinite rather than undefined in a useful sense. It usually means your sample of well patients was too small to observe a false positive, not that the test never produces one.</p></details>
+    <details><summary>Can I use this for a screening programme?</summary><p>Yes, and you should use the prevalence box when you do. A test validated in a specialist clinic will look far worse in a screening population, and modelling that before you roll out is the whole point.</p></details>
+    <details><summary>What sample size do I need for a diagnostic accuracy study?</summary><p>It is driven by the number of patients with the disease, not the total. Precision on sensitivity depends on the diseased column alone, so a large study with few cases still gives a wide interval for sensitivity.</p></details>
+  </section>
+
+  <section class="card book-cta">
+    <div class="book-cta-cover"><picture><source type="image/webp" srcset="/assets/img/clinical-research-design-simplified-600.webp 600w, /assets/img/clinical-research-design-simplified.webp 938w" sizes="120px"><img class="cover" src="/assets/img/clinical-research-design-simplified-600.jpg" srcset="/assets/img/clinical-research-design-simplified-600.jpg 600w, /assets/img/clinical-research-design-simplified.jpg 938w" sizes="120px" width="938" height="1500" loading="lazy" decoding="async" alt="Cover of Clinical Research Design Simplified"></picture></div>
+    <div>
+      <p class="eyebrow">The book behind this tool</p>
+      <h2 style="font-size:1.15rem;margin:.2rem 0 .4rem"><a href="/books/clinical-research-design-simplified.html">Clinical Research Design Simplified</a></h2>
+      <p class="sub">A step-by-step guide for nurses, physicians and allied-health researchers.</p>
+      <div class="actions">
+        <a class="btn secondary" href="/books/clinical-research-design-simplified.html">What&rsquo;s inside</a>
+        <a class="btn" href="https://www.amazon.com/dp/B0GHPD1XZC" target="_blank" rel="noopener nofollow sponsored">Get it on Amazon</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+  <div class="bottom-nav">
+      <a class="btn secondary" href="/tools/nnt-absolute-risk-calculator.html">Absolute risk and NNT</a>
+      <a class="btn secondary" href="/tools/pico-question-builder.html">Frame a diagnostic question</a>
+      <a class="btn secondary" href="/tools/">All tools</a>
+  </div>
+</main>
+
+<footer>
+  <div class="site-footer-inner">
+    <div class="site-footer-copy">&copy; <span class="footer-year"></span> Rafiq Muhammad, PhD. All rights reserved.</div>
+    <nav class="site-footer-links" aria-label="Footer">
+      <a href="/">The library</a>
+      <a href="/choose.html">Which book?</a>
+      <a href="/pathways.html">Pathways</a>
+      <a href="/tools/">Tools</a>
+      <a href="https://www.gradsummit.com/" rel="noopener">GradSummit</a>
+      <a href="https://researchmadepractical.com/" rel="noopener">Research Made Practical</a>
+    </nav>
+  </div>
+  <script>document.querySelectorAll('.footer-year').forEach(function (el) { el.textContent = new Date().getFullYear(); });</script>
+</footer>
+<script>
+
+  var Z = {0.90: 1.6448536, 0.95: 1.9599640, 0.99: 2.5758293};
+  function num(id){ var v = document.getElementById(id).value.trim();
+    if (v === '') return null; var n = Number(v); return isFinite(n) ? n : null; }
+  function fmt(x, d){ if (x === null || !isFinite(x)) return '\u2014';
+    return x.toFixed(d === undefined ? 2 : d); }
+  function pct(x, d){ if (x === null || !isFinite(x)) return '\u2014';
+    return (100 * x).toFixed(d === undefined ? 1 : d) + '%'; }
+  // Wilson score interval: behaves at 0 and 100%, where the textbook
+  // normal approximation produces impossible bounds.
+  function wilson(k, n, z){
+    if (!n) return [null, null];
+    var p = k / n, d = 1 + z * z / n;
+    var c = (p + z * z / (2 * n)) / d;
+    var h = (z / d) * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n));
+    return [Math.max(0, c - h), Math.min(1, c + h)];
+  }
+  function row(label, value, ci, note){
+    return '<tr><th scope="row">' + label + '</th><td class="num">' + value +
+      '</td><td class="num muted">' + (ci || '') + '</td><td class="muted">' +
+      (note || '') + '</td></tr>';
+  }
+  function warn(msg){
+    return '<p class="tool-warn" role="status">' + msg + '</p>';
+  }
+
+  function calc(){
+    var tp = num('tp'), fp = num('fp'), fn = num('fn'), tn = num('tn');
+    var z = Z[Number(document.getElementById('conf').value)];
+    var out = document.getElementById('out');
+    out.hidden = false;
+    if (tp === null || fp === null || fn === null || tn === null ||
+        tp < 0 || fp < 0 || fn < 0 || tn < 0){
+      out.innerHTML = warn('All four cells need a number of zero or more.'); return;
+    }
+    var dis = tp + fn, well = fp + tn, n = dis + well;
+    if (!dis || !well){
+      out.innerHTML = warn('You need at least one patient with the disease and one without, ' +
+        'or sensitivity and specificity are undefined.'); return;
+    }
+    var sens = tp / dis, spec = tn / well;
+    var prev = dis / n;
+    var ppv = (tp + fp) ? tp / (tp + fp) : null;
+    var npv = (tn + fn) ? tn / (tn + fn) : null;
+    var acc = (tp + tn) / n;
+    var ci = function(k, m){ var w = wilson(k, m, z); return pct(w[0]) + ' to ' + pct(w[1]); };
+
+    var lrp = (spec < 1) ? sens / (1 - spec) : null;
+    var lrn = (spec > 0) ? (1 - sens) / spec : null;
+    var lrCI = function(lr, seLog){
+      if (lr === null || !isFinite(lr) || lr <= 0) return '';
+      return fmt(lr * Math.exp(-z * seLog)) + ' to ' + fmt(lr * Math.exp(z * seLog));
+    };
+    var sePos = Math.sqrt((1 - sens) / (sens * dis) + spec / ((1 - spec) * well));
+    var seNeg = Math.sqrt(sens / ((1 - sens) * dis) + (1 - spec) / (spec * well));
+
+    var html = '<h3>Accuracy of the test itself</h3>' +
+      '<table class="results"><thead><tr><th>Measure</th><th class="num">Value</th>' +
+      '<th class="num">CI</th><th>Reading</th></tr></thead><tbody>' +
+      row('Sensitivity', pct(sens), ci(tp, dis), 'of ' + dis + ' with the disease, ' + tp + ' tested positive') +
+      row('Specificity', pct(spec), ci(tn, well), 'of ' + well + ' without it, ' + tn + ' tested negative') +
+      row('Likelihood ratio +', fmt(lrp), lrCI(lrp, sePos), lrp > 10 ? 'strong rule-in' : (lrp > 5 ? 'moderate rule-in' : 'weak')) +
+      row('Likelihood ratio \u2212', fmt(lrn, 3), lrCI(lrn, seNeg), lrn < 0.1 ? 'strong rule-out' : (lrn < 0.2 ? 'moderate rule-out' : 'weak')) +
+      row('Accuracy', pct(acc), ci(tp + tn, n), 'depends on prevalence; rarely the useful number') +
+      '</tbody></table>' +
+      '<h3>Performance in this sample</h3>' +
+      '<table class="results"><tbody>' +
+      row('Prevalence', pct(prev), ci(dis, n), dis + ' of ' + n + ' patients') +
+      row('PPV', pct(ppv), (tp + fp) ? ci(tp, tp + fp) : '', 'chance a positive result is correct here') +
+      row('NPV', pct(npv), (tn + fn) ? ci(tn, tn + fn) : '', 'chance a negative result is correct here') +
+      '</tbody></table>';
+
+    var alt = num('prev');
+    if (alt !== null && alt > 0 && alt < 100){
+      var q = alt / 100;
+      var ppv2 = (sens * q) / (sens * q + (1 - spec) * (1 - q));
+      var npv2 = (spec * (1 - q)) / (spec * (1 - q) + (1 - sens) * q);
+      html += '<h3>The same test at ' + alt + '% prevalence</h3><table class="results"><tbody>' +
+        row('PPV', pct(ppv2), '', 'was ' + pct(ppv) + ' at ' + pct(prev)) +
+        row('NPV', pct(npv2), '', 'was ' + pct(npv) + ' at ' + pct(prev)) +
+        '</tbody></table>' +
+        '<p class="muted">Sensitivity and specificity did not change \u2014 they are properties ' +
+        'of the test. PPV and NPV did, because they depend on how common the disease is in ' +
+        'the people being tested. This is the single most common misreading of a validation study.</p>';
+    }
+    out.innerHTML = html;
+  }
+  document.getElementById('go').addEventListener('click', calc);
+  document.getElementById('reset').addEventListener('click', function(){
+    document.getElementById('tp').value = 80; document.getElementById('fp').value = 40;
+    document.getElementById('fn').value = 20; document.getElementById('tn').value = 860;
+    document.getElementById('prev').value = '';
+    document.getElementById('out').hidden = true;
+  });
+  calc();
+
+</script>
+</body>
+</html>
