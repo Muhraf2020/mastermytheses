@@ -31,6 +31,8 @@ cannot cannibalise the other two sites.
 
 import argparse
 import html
+
+import covers
 import json
 import shutil
 import sys
@@ -125,7 +127,7 @@ def head(title, description, path, extra_ld=None):
 def card_external(b):
     """A pointer, not a description. The full page lives on the other site."""
     return """      <article class="card">
-        <div class="meta"><span class="badge">{series}</span></div>
+{cover}        <div class="meta"><span class="badge">{series}</span></div>
         <div class="title"><a style="text-decoration:none;color:inherit" href="{canonical}" target="_blank" rel="noopener">{title}</a></div>
         <div class="sub">{tagline}</div>
         <div class="actions">
@@ -135,13 +137,14 @@ def card_external(b):
       </article>""".format(
         series=html.escape(b["series"]), canonical=b["canonical"],
         title=html.escape(b["title"]), tagline=html.escape(b["tagline"]),
-        home=b["home"], buy=BUY % b["isbn"])
+        home=b["home"], buy=BUY % b["isbn"],
+        cover=covers.card_cover(b, b["canonical"], external=True))
 
 
 def card_local(b):
     t = "%d fill-in templates" % b["templates"] if b.get("templates") else "Step-by-step guide"
     return """      <article class="card">
-        <div class="meta"><span class="badge">{series}</span><span class="badge">{t}</span></div>
+{cover}        <div class="meta"><span class="badge">{series}</span><span class="badge">{t}</span></div>
         <div class="title"><a style="text-decoration:none;color:inherit" href="/books/{slug}.html">{title}</a></div>
         <div class="sub">{tagline}</div>
         <div class="actions">
@@ -151,7 +154,8 @@ def card_local(b):
       </article>""".format(
         series=html.escape(b["series"]), t=t, slug=b["slug"],
         title=html.escape(b["title"]), tagline=html.escape(b["tagline"]),
-        buy=BUY % b["asin"])
+        buy=BUY % b["asin"],
+        cover=covers.card_cover(b, "/books/%s.html" % b["slug"]))
 
 
 def build_index(books):
@@ -310,14 +314,19 @@ def build_book(b, siblings):
 <main>
   <div class="breadcrumbs"><a href="/">The library</a> &rsaquo; <span>{short}</span></div>
 
-  <h1 class="title" style="font-size:1.9rem;margin:1rem 0 .4rem">{title}</h1>
-  <p class="sub" style="max-width:72ch">{tagline}</p>
-  <div class="meta" style="margin:.6rem 0 1rem">
-    <span class="badge">{series}</span>{templates}<span class="badge">{audience}</span>
-  </div>
+  <div class="book-hero">
+    {detail_cover}
+    <div class="book-hero-body">
+      <h1 class="title" style="font-size:1.9rem;margin:1rem 0 .4rem">{title}</h1>
+      <p class="sub" style="max-width:72ch">{tagline}</p>
+      <div class="meta" style="margin:.6rem 0 1rem">
+        <span class="badge">{series}</span>{templates}<span class="badge">{audience}</span>
+      </div>
 
-  <div class="actions">
-    <a class="btn" href="{buy}" target="_blank" rel="noopener nofollow sponsored">Get it on Amazon</a>
+      <div class="actions">
+        <a class="btn" href="{buy}" target="_blank" rel="noopener nofollow sponsored">Get it on Amazon</a>
+      </div>
+    </div>
   </div>
 
   <div class="hr"></div>
@@ -383,7 +392,9 @@ def build_book(b, siblings):
            approach=html.escape(b["approach"]), outcomes=outcomes,
            who=who, not_for=html.escape(d["not_for"]), inside=inside,
            differs=html.escape(d["differs"]), faq=faq,
-           frameworks=frameworks, related=related, footer=FOOTER)
+           frameworks=frameworks, related=related, footer=FOOTER,
+           detail_cover=covers.picture(b, sizes=covers.SIZES_DETAIL,
+                                       css="cover book-hero-cover", lazy=False))
 
 
 def _by_slug(books):
@@ -492,12 +503,30 @@ def build_pathways(books):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--allow-missing-covers", action="store_true",
+                    help="build even though some books have no cover image; "
+                         "their cards fall back to text only")
     args = ap.parse_args()
 
     ext = external_books.load()
     books = LOCAL_BOOKS + ext
     print("library: %d books (%d published here, %d linked out)"
           % (len(books), len(LOCAL_BOOKS), len(ext)))
+
+    # A grid where some cards carry a cover and others do not reads as broken,
+    # so a missing cover stops the build rather than shipping quietly.
+    absent = covers.missing(books)
+    if absent:
+        print("covers: %d of %d present, missing:" % (len(books) - len(absent), len(books)))
+        for slug in absent:
+            print("  %s" % slug)
+        if not args.allow_missing_covers:
+            raise SystemExit(
+                "Refusing to build. Add the covers (see incoming-covers/README.md, "
+                "then run tools/import_clinical_covers.py), or pass "
+                "--allow-missing-covers to build text-only cards for these.")
+    else:
+        print("covers: all %d present" % len(books))
 
     pages = {
         "index.html": build_index(books),

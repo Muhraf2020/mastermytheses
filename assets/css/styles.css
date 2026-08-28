@@ -460,3 +460,19 @@ footer{margin:2rem 0 1rem; text-align:center; color:var(--muted)}
     display: none;
   }
 }
+
+/* COVERS:BEGIN - book cover images on cards and book pages */
+.cover-link{ display:block; margin:0 0 .45rem; border-radius:12px; overflow:hidden }
+.cover-link picture{ display:block }
+.cover{ border-radius:12px; background:#f1f5f9 }
+
+/* Book page hero: cover beside the title block, stacked on small screens. */
+.book-hero{ display:flex; gap:1.6rem; align-items:flex-start; margin:.5rem 0 0 }
+.book-hero-body{ flex:1 1 auto; min-width:0 }
+.book-hero-cover{ flex:0 0 220px; width:220px; box-shadow:var(--ring) }
+@media (max-width: 640px){
+  .book-hero{ flex-direction:column; gap:1rem; align-items:center }
+  .book-hero-cover{ flex:none; width:min(62vw, 240px) }
+  .book-hero-body{ width:100% }
+}
+/* COVERS:END */

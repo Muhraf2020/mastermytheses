@@ -9,3 +9,6 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+
+# originals for cover import; the derived files in assets/img are what ship
+incoming-covers/
