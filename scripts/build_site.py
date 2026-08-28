@@ -91,7 +91,8 @@ FOOTER = """<footer>
 </footer>"""
 
 
-def head(title, description, path, extra_ld=None):
+def head(title, description, path, extra_ld=None,
+         robots="index, follow, max-snippet:-1, max-image-preview:large"):
     url = SITE + path
     e = lambda v: html.escape(v, quote=True)
     ld = "\n".join(
@@ -105,7 +106,7 @@ def head(title, description, path, extra_ld=None):
   <title>{t}</title>
   <meta name="description" content="{d}">
   <link rel="canonical" href="{url}">
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="robots" content="{robots}">
   <meta name="author" content="{author}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Master My Theses">
@@ -121,7 +122,8 @@ def head(title, description, path, extra_ld=None):
 </head>
 <body>
 {nav}
-""".format(t=e(title), d=e(description), url=url, author=e(AUTHOR), ld=ld, nav=NAV)
+""".format(t=e(title), d=e(description), url=url, author=e(AUTHOR), ld=ld, nav=NAV,
+           robots=robots)
 
 
 def card_external(b):
@@ -415,6 +417,80 @@ def _resolve(slugs, by, where):
     return [by[s] for s in slugs]
 
 
+def build_books_index(books):
+    """/books/ - every title once, grouped by series.
+
+    Nothing on the site links here, but it is the URL people guess: it mirrors
+    gradsummit.com/books/, and it is the natural parent of every
+    /books/<slug>.html. Without an index.html, GitHub Pages serves the 404 page
+    for the whole directory.
+
+    It is noindex, follow. The homepage already lists these twenty-six books and
+    targets the same query, so a second indexable page of the same titles would
+    compete with it rather than add anything. Crawlers still follow the links
+    out. tools/generate_sitemap.py already skips pages carrying noindex, so this
+    stays out of the sitemap with no change needed there.
+
+    The homepage groups books by the job they do and repeats a title across
+    shelves. This lists each book exactly once, by series, which is what someone
+    who typed /books/ is looking for.
+    """
+    seen, order, groups = set(), [], {}
+    for b in books:
+        if b["slug"] in seen:
+            continue
+        seen.add(b["slug"])
+        series = b["series"]
+        if series not in groups:
+            groups[series] = []
+            order.append(series)
+        groups[series].append(b)
+
+    sections = []
+    for series in order:
+        items = sorted(groups[series], key=lambda x: x["title"].lower())
+        cards = "\n".join(
+            card_external(b) if b.get("canonical") else card_local(b) for b in items)
+        sections.append(
+            '  <h2 style="font-size:1.25rem;margin:2rem 0 .15rem">%s</h2>\n'
+            '  <p class="sub" style="margin:0 0 1rem">%d book%s</p>\n'
+            '  <div class="grid grid-3">\n%s\n  </div>'
+            % (html.escape(series), len(items), "" if len(items) == 1 else "s", cards))
+
+    return head(
+        "Every book | Master My Theses",
+        "All %d books across four series: the doctoral guides, the Research Made "
+        "Practical workbooks, the clinical practice workbooks and the healthcare "
+        "research guides." % len(seen),
+        "/books/",
+        robots="noindex, follow") + """
+<main>
+  <div class="breadcrumbs"><a href="/">The library</a> &rsaquo; <span>Every book</span></div>
+  <h1 class="title" style="font-size:2rem;margin:1rem 0 .5rem">Every book</h1>
+  <p class="sub" style="max-width:72ch">
+    All {n} titles, each listed once, grouped by series. If you would rather start
+    from the problem you are stuck on, the <a href="/choose.html">chooser</a> maps
+    situations to books, and the <a href="/pathways.html">pathways</a> put them in
+    a reading order.
+  </p>
+  <div class="hr"></div>
+
+{sections}
+
+  <div class="hr"></div>
+  <div class="bottom-nav">
+    <a class="btn secondary" href="/">The library by topic</a>
+    <a class="btn secondary" href="/choose.html">Which book do I need?</a>
+    <a class="btn secondary" href="/pathways.html">Reading pathways</a>
+  </div>
+</main>
+
+{footer}
+</body>
+</html>
+""".format(n=len(seen), sections="\n\n".join(sections), footer=FOOTER)
+
+
 def build_choose(books):
     by = _by_slug(books)
     rows = []
@@ -530,6 +606,7 @@ def main():
 
     pages = {
         "index.html": build_index(books),
+        "books/index.html": build_books_index(books),
         "choose.html": build_choose(books),
         "pathways.html": build_pathways(books),
     }
@@ -554,6 +631,11 @@ def main():
     ext_by_slug = {b["slug"]: b for b in ext}
     stubs = 0
     for old in sorted((REPO / "books").glob("*.html")):
+        # books/index.html is the directory listing this loop knows nothing
+        # about; without this it would be treated as an unrecognised book and
+        # deleted on every build.
+        if old.name == "index.html":
+            continue
         if old.stem in local_slugs:
             continue
         target = ext_by_slug.get(old.stem, {}).get("canonical")
